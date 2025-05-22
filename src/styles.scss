@@ -1,1 +1,1487 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --text: rgba(3, 2, 41, 1);
+  --blue-100: rgba(215, 234, 255, 1);
+  --gray-soft900: rgba(64, 74, 96, 1);
+  --gray-soft500: rgba(102, 112, 133, 1);
+  --gray-soft400: rgba(133, 141, 157, 1);
+  --gray-soft25: rgba(250, 250, 250, 1);
+  --gray-soft700: rgba(82, 93, 115, 1);
+  --green-100: rgba(211, 244, 224, 1);
+  --green-50: rgba(233, 250, 240, 1);
+  --white: rgba(255, 255, 255, 1);
+  --green-700: rgba(2, 152, 62, 1);
+  --gray-soft100: rgba(224, 226, 231, 1);
+  --slate-700: rgba(51, 65, 85, 1);
+  --green-600: rgba(8, 185, 78, 1);
+  --red-50: rgba(255, 241, 240, 1);
+  --red-700: rgba(229, 55, 43, 1);
+  --purple-500: rgba(122, 68, 255, 1);
+  --colorsorange: rgba(255, 149, 0, 1);
+  --blue-50: rgba(236, 245, 255, 1);
+  --red-800: rgba(198, 25, 13, 1);
+  --red-100: rgba(255, 226, 224, 1);
+  --gray-soft200: rgba(194, 198, 206, 1);
+  --night-blue: rgba(56, 56, 116, 1);
+  --yellow-600: rgba(235, 166, 34, 1);
+  --grayscale-gray-7: rgba(101, 101, 117, 1);
+  --font-family-primary: "Public Sans", Helvetica;
+  --basic-typography-h6-font-weight: 400;
+  --basic-typography-h6-font-size: 15px;
+  --basic-typography-h6-letter-spacing: 0.15px;
+  --basic-typography-h6-line-height: 22px;
+  --basic-typography-h6-font-style: normal;
+  --basic-typography-caption-font-weight: 400;
+  --basic-typography-caption-font-size: 13px;
+  --basic-typography-caption-letter-spacing: 0.4000000059604645px;
+  --basic-typography-caption-line-height: 18px;
+  --basic-typography-caption-font-style: normal;
+  --basic-typography-body-2-font-family: "Public Sans", Helvetica;
+  --basic-typography-body-2-font-weight: 400;
+  --basic-typography-body-2-font-size: 13px;
+  --basic-typography-body-2-letter-spacing: 0px;
+  --basic-typography-body-2-line-height: 20px;
+  --basic-typography-body-2-font-style: normal;
+  --basic-typography-h5-font-family: "Public Sans", Helvetica;
+  --basic-typography-h5-font-weight: 500;
+  --basic-typography-h5-font-size: 18px;
+  --basic-typography-h5-letter-spacing: 0px;
+  --basic-typography-h5-line-height: 28px;
+  --basic-typography-h5-font-style: normal;
+  --xs: 0px 1px 3px 0px rgba(0, 0, 0, 0.05),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  --shadow-background-md: 0px 16px 18px 0px rgba(0, 0, 0, 0.06);
+}
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Public+Sans:400,500,600,700|Inter:400,600,700");
+
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0px;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.dashboard-layout {
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  .page-content-wrapper {
+    background-color: var(--gray-soft25);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-structure {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+    gap: 35px;
+    position: relative;
+  }
+
+  .sidebar {
+    display: inline-flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 16px;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    flex-shrink: 0;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-background-md);
+    width: 250px;
+    transition: width 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 100;
+
+    &.collapsed {
+      width: 80px;
+
+      .sidebar-top-content,
+      .sidebar-bottom-content {
+        width: 100%;
+      }
+
+      .user-profile-container {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .sidebar-menu {
+        align-items: center;
+      }
+
+      .menu-item {
+        padding: 10px 0;
+        justify-content: center;
+      }
+
+      .menu-item-link {
+        flex-grow: 0;
+        justify-content: center;
+      }
+
+      .menu-item-label,
+      .user-details,
+      .user-profile-section .logout-icon-container,
+      .user-profile-section .logout-icon-container-alt {
+        display: none;
+      }
+
+      .user-profile-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+
+  .sidebar-top-content {
+    display: flex;
+    flex-direction: column;
+    width: 218px;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+    flex: 0 0 auto;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 12px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--gray-soft100);
+      cursor: pointer;
+    }
+
+    &.active {
+      background-color: var(--green-50);
+
+      &:hover {
+        background-color: var(--green-100);
+      }
+    }
+  }
+
+  .menu-item-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+  }
+
+  .menu-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-item-label {
+    position: relative;
+    flex: 1;
+    margin-top: -1px;
+    font-family: var(--font-family-primary);
+    font-weight: var(--basic-typography-h6-font-weight);
+    color: var(--gray-soft700);
+    font-size: var(--basic-typography-h6-font-size);
+    letter-spacing: var(--basic-typography-h6-letter-spacing);
+    line-height: var(--basic-typography-h6-line-height);
+    font-style: var(--basic-typography-h6-font-style);
+  }
+
+  .sidebar-bottom-content {
+    display: flex;
+    flex-direction: column;
+    width: 218px;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    flex: 0 0 auto;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .menu-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .sidebar-divider {
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    height: 1px;
+    object-fit: cover;
+  }
+
+  .user-profile-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 4px 0px 0px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .user-profile-container {
+    display: flex;
+    width: 218px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 4px 0px 0px;
+    position: relative;
+    margin-right: -4px;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .user-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .user-avatar {
+    position: relative;
+    width: 48px;
+    height: 48px;
+  }
+
+  .user-details {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .user-name,
+  .user-role {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: var(--font-family-primary);
+    font-weight: var(--basic-typography-h6-font-weight);
+    color: var(--gray-soft700);
+    font-size: var(--basic-typography-h6-font-size);
+    letter-spacing: var(--basic-typography-h6-letter-spacing);
+    line-height: var(--basic-typography-h6-line-height);
+    white-space: nowrap;
+    font-style: var(--basic-typography-h6-font-style);
+  }
+
+  .logout-icon-container {
+    display: inline-flex;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .logout-icon {
+    position: relative;
+    width: 18px;
+    height: 18px;
+  }
+
+  .logout-icon-svg {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 2px;
+    left: 2px;
+  }
+
+  .logout-icon-container-alt {
+    display: inline-flex;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+    margin-left: -22px;
+  }
+
+  .sidebar-collapser-button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 24px;
+    left: 230px; // This will be managed by JS, but set initial
+    cursor: pointer;
+    z-index: 1000;
+    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+    &.rotated {
+      transform: rotate(180deg);
+    }
+  }
+
+  app-content-panel {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 27px 0px;
+    position: relative;
+  }
+
+  .panel-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .content-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    padding: 0 20px;
+  }
+
+  .info-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: 0px 1px 3px #0000000d, 0px 1px 2px #0000001a;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .description-card {
+    width: 385px;
+    max-height: calc(100dvh - 54px);
+    gap: 12px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      display: none;
+    }
+  }
+
+  .card-header-flex {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .card-title {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 700;
+    color: var(--green-700);
+    font-size: 20px;
+    letter-spacing: 0.2px;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+
+  .card-body-text {
+    align-self: stretch;
+    font-weight: 400;
+    color: var(--gray-soft700);
+    font-size: 12px;
+    letter-spacing: 0.12px;
+    line-height: 21px;
+    position: relative;
+    font-family: "Public Sans", Helvetica;
+  }
+
+  .small-vertical-spacer {
+    position: relative;
+    width: 1px;
+    height: 22px;
+  }
+
+  .card-subtitle {
+    position: relative;
+    width: 227px;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 700;
+    color: var(--green-700);
+    font-size: 20px;
+    letter-spacing: 0.2px;
+    line-height: 22px;
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+
+    &.fixed-height {
+      height: 22px;
+    }
+  }
+
+  .detail-label {
+    width: 150px;
+    margin-top: -1px;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 700;
+    color: var(--slate-700);
+    font-size: 15px;
+    letter-spacing: 0.15px;
+    line-height: 22px;
+  }
+
+  .detail-value {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 400;
+    color: var(--gray-soft700);
+    font-size: 15px;
+    letter-spacing: 0.15px;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+
+  .detail-check-value {
+    display: flex;
+    width: 60px;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+
+  .check-icon {
+    position: relative;
+    width: 15px;
+    height: 15px;
+  }
+
+  .section-sub-heading {
+    width: fit-content;
+    font-weight: 700;
+    color: var(--slate-700);
+    font-size: 15px;
+    letter-spacing: 0.15px;
+    line-height: 22px;
+    white-space: nowrap;
+    position: relative;
+    font-family: "Public Sans", Helvetica;
+  }
+
+  .remediation-entry-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 13px 18px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    background-color: var(--white);
+    border-radius: 15px;
+    border: 1px solid #f0f1f3;
+    box-shadow: var(--xs);
+  }
+
+  .remediation-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+  }
+
+  .remediation-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 257px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .remediation-title {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    opacity: 0.7;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 700;
+    color: var(--text);
+    font-size: 15px;
+    letter-spacing: 0.15px;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+
+  .remediation-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 16px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    background-color: var(--gray-soft25);
+    border-radius: 8px;
+  }
+
+  .icon-label-group {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .circular-icon-bg {
+    position: relative;
+    width: 52.92px;
+    height: 52.92px;
+    background-color: var(--blue-100);
+    border-radius: 26.46px;
+  }
+
+  .server-icon {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 14px;
+    left: 14px;
+  }
+
+  .icon-associated-texts {
+    display: flex;
+    flex-direction: column;
+    width: 67.5px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.7px;
+    position: relative;
+  }
+
+  .primary-label-small {
+    position: relative;
+    width: fit-content;
+    margin-top: -0.67px;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 600;
+    color: var(--gray-soft900);
+    font-size: 12.1px;
+    letter-spacing: 0;
+    line-height: 13.5px;
+    white-space: nowrap;
+  }
+
+  .secondary-label-xsmall {
+    position: relative;
+    align-self: stretch;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 500;
+    color: var(--gray-soft500);
+    font-size: 9.4px;
+    letter-spacing: 0;
+    line-height: 10.1px;
+  }
+
+  .vertical-divider-line {
+    position: relative;
+    align-self: stretch;
+    width: 1px;
+    background-color: var(--gray-soft200);
+  }
+
+  .detail-text-block {
+    position: relative;
+    flex: 1;
+    margin-top: -1px;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 400;
+    color: var(--gray-soft900);
+    font-size: 13px;
+    letter-spacing: 0.13px;
+    line-height: 22px;
+  }
+
+  app-attack-path-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 30px;
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--xs);
+    min-width: 0;
+    min-height: calc(100dvh - 54px);
+  }
+
+  .section-main-title {
+    color: var(--green-700);
+    font-size: 20px;
+    letter-spacing: 0.2px;
+    line-height: 22px;
+    position: relative;
+    width: fit-content;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .attack-path-visual-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 16px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    background-color: var(--gray-soft25);
+    border-radius: 15px;
+    overflow-x: auto;
+  }
+
+  .attack-path-scroll-area {
+    display: flex;
+    width: 649px;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+
+  .attack-path-node {
+    display: flex;
+    flex-direction: column;
+    width: 81px;
+    align-items: center;
+    gap: 8.1px;
+    padding: 0px 6.75px;
+    position: relative;
+    border-radius: 0px 2.7px 2.7px 0px;
+  }
+
+  .node-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 67.5px;
+    gap: 5.4px;
+    align-items: center;
+    justify-content: center;
+    padding: 9.45px 0px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .node-icon-display {
+    position: relative;
+    width: 52.92px;
+    height: 52.92px;
+    background-color: var(--red-50);
+    border-radius: 26.46px;
+  }
+
+  .node-icon-stacked-container {
+    width: 43px;
+    height: 45px;
+    left: 14px;
+    position: relative;
+    top: -5px;
+  }
+
+  .venetian-mask-icon {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 19px;
+    left: 0;
+  }
+
+  .status-badge-overlay-wrapper {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 23px;
+  }
+
+  .status-badge-overlay {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    top: -1px;
+    left: -1px;
+    background-color: var(--purple-500);
+    border-radius: 11px;
+    border: 1px solid;
+    border-color: #fafafa;
+  }
+
+  .badge-icon-group {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 3px;
+    left: 4px;
+  }
+
+  .node-text-container {
+    display: flex;
+    width: 67.5px;
+    align-items: center;
+    gap: 2.7px;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .node-primary-text {
+    position: relative;
+    width: fit-content;
+    margin-top: -0.67px;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 600;
+    color: var(--gray-soft700);
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 13.5px;
+    white-space: nowrap;
+  }
+
+  .node-secondary-text {
+    position: relative;
+    align-self: stretch;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 500;
+    color: var(--white); // Note: This was #ffffff, changed to var if available, else keep #ffffff if specific.
+    font-size: 9.4px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 10.1px;
+  }
+
+  .path-connector-image {
+    position: relative;
+    flex: 1;
+    flex-grow: 1;
+
+    &.path-connector-group {
+      width: 208px;
+      height: 109.05px;
+    }
+  }
+
+  .load-balancer-icon {
+    position: relative;
+    width: 53.43px;
+    height: 52.92px;
+  }
+
+  .node-group-vertical {
+    display: flex;
+    flex-direction: column;
+    width: 81px;
+    align-items: flex-start;
+    gap: 13.5px;
+    position: relative;
+  }
+
+  .node-subgroup {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .node-icon-overlay-container {
+    width: 46px;
+    height: 43px;
+    left: 13px;
+    position: relative;
+    top: -5px;
+  }
+
+  .server-icon-base {
+    width: 26px;
+    top: 21px;
+    left: 0;
+    position: absolute;
+    height: 22px;
+  }
+
+  .status-indicator-circle {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 0;
+    left: 24px;
+    background-color: var(--red-700);
+    border-radius: 27px;
+  }
+
+  .shield-cross-icon {
+    position: absolute;
+    width: 15px;
+    height: 16px;
+    top: 3px;
+    left: 28px;
+  }
+
+  .severity-tags-container {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .severity-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0px 12px;
+    position: relative;
+    flex: 0 0 auto;
+    border-radius: 30px;
+  }
+
+  .tag-icon-text-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .tag-icon-background { // Assuming this class was for the img, if img has specific bg, it should be applied directly or via its own class
+    position: relative;
+    width: 25px;
+    height: 25px;
+    // background-image: url(images/rectangle-9815.svg); // Path needs to be updated for Angular assets
+    background-size: 100% 100%;
+  }
+
+  .tag-icon-positioner { // Likely for an icon within the background, or the img tag itself
+    position: relative;
+    width: 18px;
+    height: 18px;
+    top: 4px;
+    left: 4px;
+  }
+
+  .tag-text {
+    margin-top: -1px;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 38px;
+    position: relative;
+    width: fit-content;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 700;
+    white-space: nowrap;
+
+    &.critical {
+      color: var(--red-700);
+    }
+    &.high {
+      color: var(--colorsorange);
+    }
+    &.medium {
+      // No specific color, inherits default or var(--text) if defined elsewhere
+    }
+    &.low {
+      color: var(--green-700);
+    }
+  }
+
+  .data-table-card {
+    display: flex;
+    flex-direction: column;
+    width: 367px;
+    align-items: center;
+    position: relative;
+    background-color: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #f0f1f3;
+    box-shadow: var(--xs);
+  }
+
+  .table-content-area {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    background-color: var(--white);
+  }
+
+  .table-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+
+    &.asset-column {
+      width: 221px;
+    }
+    &.risk-column {
+      flex: 1;
+      flex-grow: 1;
+      height: 170px; // Consider if this height should be dynamic
+    }
+  }
+
+  .table-header {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    border-bottom: 1px solid #e0e2e7;
+  }
+
+  .table-header-label {
+    position: relative;
+    width: fit-content;
+    margin-top: -2px;
+    font-family: var(--font-family-primary);
+    font-weight: var(--basic-typography-caption-font-weight);
+    color: var(--gray-soft400);
+    font-size: var(--basic-typography-caption-font-size);
+    letter-spacing: var(--basic-typography-caption-letter-spacing);
+    line-height: var(--basic-typography-caption-line-height);
+    white-space: nowrap;
+    font-style: var(--basic-typography-caption-font-style);
+  }
+
+  .table-cell {
+    display: flex;
+    height: 65px;
+    align-items: center;
+    padding: 16px 10px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    border-bottom: 1px solid #e0e2e7;
+
+    &.centered-content {
+      justify-content: center;
+      padding: 16px 24px;
+    }
+  }
+
+  .asset-cell-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8.1px;
+    position: relative;
+    flex: 0 0 auto;
+    margin-top: -15.45px;
+    margin-bottom: -15.45px;
+    border-radius: 0px 2.7px 2.7px 0px;
+  }
+
+  .asset-info-group {
+    display: inline-flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    padding: 9.45px 0px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .asset-icon-bg {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    background-color: var(--blue-50);
+    border-radius: 22.5px;
+  }
+
+  .asset-icon {
+    width: 22px;
+    top: 12px;
+    left: 12px;
+    position: absolute;
+    height: 22px;
+  }
+
+  .asset-text-details {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .risk-status-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 16px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--red-100);
+    border-radius: 38px;
+    border: 0px none;
+  }
+
+  .risk-status-text {
+    position: relative;
+    width: fit-content;
+    font-family: "Public Sans", Helvetica;
+    font-weight: 700;
+    color: var(--red-800);
+    font-size: 15px;
+    letter-spacing: 0.15px;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+
+  .table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    background-color: var(--white);
+  }
+
+  .pagination-controls {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .pagination-info {
+    position: relative;
+    width: 102px;
+    height: 20px;
+  }
+
+  .pagination-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: var(--basic-typography-body-2-font-family);
+    font-weight: var(--basic-typography-body-2-font-weight);
+    color: var(--gray-soft500);
+    font-size: var(--basic-typography-body-2-font-size);
+    letter-spacing: var(--basic-typography-body-2-letter-spacing);
+    line-height: var(--basic-typography-body-2-line-height);
+    white-space: nowrap;
+    font-style: var(--basic-typography-body-2-font-style);
+  }
+
+  .summary-chart-card {
+    display: flex;
+    flex-direction: column;
+    width: 340px;
+    height: 212px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px 30px;
+    position: relative;
+    background-color: var(--white);
+    border-radius: 20px;
+    border: 1.1px solid #f2f3f7;
+    box-shadow: 0px 2.9px 4px #0000000d;
+  }
+
+  .chart-card-title {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.1px;
+    font-family: var(--basic-typography-h5-font-family);
+    font-weight: var(--basic-typography-h5-font-weight);
+    color: var(--gray-soft500);
+    font-size: var(--basic-typography-h5-font-size);
+    letter-spacing: var(--basic-typography-h5-letter-spacing);
+    line-height: var(--basic-typography-h5-line-height);
+    white-space: nowrap;
+    font-style: var(--basic-typography-h5-font-style);
+  }
+
+  .chart-legend-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .legend-column {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px; // HTML inline style might override this, SCSS reflects CSS structure
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .legend-item-row {
+    display: inline-flex;
+    align-items: center;
+    // gap: 20px; // HTML inline style might override this (was 0px), SCSS reflects CSS structure
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .legend-entry {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    flex: 0 0 auto;
+    cursor: pointer;
+  }
+
+  .legend-color-marker {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 3.5px;
+
+    &.critical {
+      background-color: var(--red-800);
+    }
+    &.high {
+      background-color: var(--red-700);
+    }
+    &.medium {
+      background-color: var(--yellow-600);
+    }
+    &.low {
+      background-color: var(--green-600);
+    }
+  }
+
+  .legend-item-count {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 700;
+    color: var(--night-blue);
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  .legend-item-label {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: var(--night-blue);
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  .doughnut-chart-visual {
+    position: relative;
+    width: 149px;
+    height: 149px;
+  }
+
+  .doughnut-chart-image-container {
+    position: relative;
+    width: 208px;
+    height: 206px;
+    top: -29px;
+    left: -27px;
+  }
+
+  .doughnut-chart-image {
+    position: relative;
+    width: 149px;
+    height: 149px;
+    top: 29px;
+    left: 29px;
+    // background-image: url(images/ellipse-5.svg); // Path needs to be updated for Angular assets, removed if canvas is used
+    background-size: 100% 100%;
+  }
+
+  .doughnut-center-value {
+    position: absolute;
+    width: 68px;
+    top: 59px;
+    left: 40px;
+    font-family: "Inter", Helvetica;
+    font-weight: 600;
+    color: var(--grayscale-gray-7);
+    font-size: 35px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 28px;
+    z-index: 10;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    background-color: var(--white);
+    border: 1px solid var(--gray-soft100);
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    box-shadow: var(--xs);
+    line-height: 0;
+
+    .icon-menu,
+    .icon-close {
+      display: inline-block;
+    }
+
+    .icon-close {
+      display: none;
+    }
+
+    &.active {
+      .icon-menu {
+        display: none;
+      }
+      .icon-close {
+        display: inline-block;
+      }
+    }
+
+    svg {
+      display: block;
+    }
+  }
+
+  // Responsive styles
+  @media (max-width: 1200px) {
+    .main-structure {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -250px; // Initial position, will be toggled by JS/Angular
+      top: 0;
+      height: 100vh;
+      z-index: 1000;
+      transition: transform 0.3s ease-in-out;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+      &.visible {
+        transform: translateX(250px);
+      }
+
+      // &.collapsed handling might need adjustment with .visible
+      // Original CSS had specific rules for .sidebar.collapsed.visible
+      // This might need to be driven by component logic rather than pure CSS if sidebar cannot be collapsed and visible simultaneously in mobile.
+      // For now, reflecting the provided CSS:
+      &.collapsed {
+        width: 250px; // On mobile, collapsed might mean full width when shown.
+        // transform: translateX(0); // This would show it normally, not as an overlay.
+
+        &.visible {
+          transform: translateX(250px); // This implies it slides out from its original collapsed state logic.
+        }
+      }
+    }
+
+    .sidebar-collapser-button {
+      display: none;
+    }
+
+    .mobile-menu-toggle {
+      display: block;
+    }
+
+    app-content-panel {
+      padding: 70px 20px 20px;
+      width: 100%;
+    }
+
+    .content-row {
+      flex-direction: column;
+      padding: 0 10px;
+    }
+
+    .description-card,
+    app-attack-path-card {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .description-card {
+      max-height: none;
+      overflow-y: visible;
+    }
+
+    app-attack-path-card {
+      min-height: auto;
+    }
+
+    .attack-path-scroll-area {
+      min-width: 100%;
+      justify-content: flex-start;
+      padding: 10px;
+    }
+
+    .severity-tags-container {
+      flex-wrap: wrap;
+    }
+
+    .content-row > .data-table-card,
+    .content-row > .summary-chart-card {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .detail-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .detail-label {
+      width: 100%;
+    }
+
+    .remediation-header {
+      gap: 10px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .remediation-detail-item {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .vertical-divider-line {
+      width: 100%;
+      height: 1px;
+    }
+  }
+}
+

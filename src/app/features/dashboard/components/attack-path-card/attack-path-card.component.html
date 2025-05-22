@@ -1,0 +1,86 @@
+<div class="section-main-title">{{ mainTitle }}</div>
+  <div class="attack-path-visual-container">
+    <div class="attack-path-scroll-area">
+      <ng-container *ngFor="let segment of attackPathSegments; trackBy: trackById">
+        <div *ngIf="isAttackNode(segment) && (segment.type === 'single' || segment.type === 'grouped-vertical')"
+             [class.attack-path-node]="segment.type === 'single'"
+             [class.node-group-vertical]="segment.type === 'grouped-vertical'"
+             [ngStyle]="segment.nodeStyle">
+
+          <ng-container *ngIf="segment.type === 'single'">
+            <div class="node-icon-wrapper" [ngStyle]="segment.iconWrapperStyle">
+              <div class="node-icon-display" [ngStyle]="getIconStyle(segment.icon)">
+                <div [class.node-icon-stacked-container]="segment.statusBadge && segment.statusBadge.isOverlay"
+                     [class.node-icon-overlay-container]="(segment.statusBadge && !segment.statusBadge.isOverlay && segment.id.startsWith('node4')) || (!segment.statusBadge && segment.id.startsWith('node4'))">
+                    <img *ngIf="getIconPath(segment.icon) === imagePaths.VENETIAN_MASK_ICON"
+                         class="venetian-mask-icon" [src]="getIconPath(segment.icon)" alt="Node Icon" />
+                    <img *ngIf="getIconPath(segment.icon) !== imagePaths.VENETIAN_MASK_ICON && getIconPath(segment.icon) !== imagePaths.LOAD_BALANCER_ICON && segment.id.startsWith('node4')"
+                          class="server-icon-base" [src]="getIconPath(segment.icon)" alt="Node Icon" />
+                    <img *ngIf="getIconPath(segment.icon) === imagePaths.LOAD_BALANCER_ICON"
+                         class="load-balancer-icon" [src]="getIconPath(segment.icon)" alt="Load Balancer" />
+                  <div *ngIf="segment.statusBadge && segment.statusBadge.isOverlay" class="status-badge-overlay-wrapper">
+                    <div class="status-badge-overlay" [style.background-color]="segment.statusBadge.bgColor">
+                      <img class="badge-icon-group" [src]="segment.statusBadge.iconPath" alt="Status" />
+                    </div>
+                  </div>
+                   <div *ngIf="segment.statusBadge && !segment.statusBadge.isOverlay && segment.id.startsWith('node4')">
+                        <div class="status-indicator-circle" [style.background-color]="segment.statusBadge.bgColor"></div>
+                        <img class="shield-cross-icon" [ngStyle]="segment.statusBadge.customShieldStyle" [src]="segment.statusBadge.iconPath" alt="Status"/>
+                    </div>
+                </div>
+              </div>
+              <div class="node-text-container" [ngStyle]="segment.textContainerStyle">
+                <div class="node-primary-text" [ngStyle]="segment.primaryTextStyle">{{ segment.primaryText }}</div>
+                <div *ngIf="segment.secondaryText" class="node-secondary-text" [ngStyle]="segment.secondaryTextStyle">{{ segment.secondaryText }}</div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="segment.type === 'grouped-vertical' && segment.nodes">
+            <div *ngFor="let subNode of segment.nodes; trackBy: trackById" class="node-subgroup">
+                <div class="attack-path-node" [ngStyle]="subNode.nodeStyle">
+                    <div class="node-icon-wrapper" [ngStyle]="subNode.iconWrapperStyle">
+                        <div class="node-icon-display" [ngStyle]="getIconStyle(subNode.icon)">
+                             <div class="node-icon-overlay-container">
+                                <img class="server-icon-base" [src]="getIconPath(subNode.icon)" alt="Server Icon" />
+                                <div *ngIf="subNode.statusBadge && !subNode.statusBadge.isOverlay">
+                                    <div class="status-indicator-circle" [style.background-color]="subNode.statusBadge.bgColor"></div>
+                                    <img class="shield-cross-icon" [ngStyle]="subNode.statusBadge.customShieldStyle" [src]="subNode.statusBadge.iconPath" alt="Status"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="node-text-container" [ngStyle]="subNode.textContainerStyle">
+                            <div class="node-primary-text" [ngStyle]="subNode.primaryTextStyle">{{ subNode.primaryText }}</div>
+                            <div *ngIf="subNode.secondaryText" class="node-secondary-text" [ngStyle]="subNode.secondaryTextStyle">{{ subNode.secondaryText }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </ng-container>
+        </div>
+        <img *ngIf="isAttackConnection(segment)"
+             class="path-connector-image"
+             [class.path-connector-group]="segment.type === 'connector-group'"
+             [src]="segment.imagePath"
+             alt="Path Connector"
+             [ngStyle]="segment.style" />
+      </ng-container>
+    </div>
+  </div>
+
+  <img class="sidebar-divider" [src]="imagePaths.CARD_DIVIDER" alt="Divider" />
+
+  <div class="severity-tags-container">
+    <div *ngFor="let tag of severityTags; trackBy: trackById" class="severity-tag">
+      <div class="tag-icon-text-group">
+        <img [src]="tag.iconPath" [alt]="tag.type + ' severity icon'">
+        <div class="tag-text" [ngClass]="tag.type">{{ tag.label }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-main-title" style="margin-top: 20px;">{{ relatedAssetsTitle }}</div>
+  <div class="content-row" style="padding: 0; gap: 10px; width:100%;">
+    <app-data-table-card></app-data-table-card>
+    <app-summary-chart-card></app-summary-chart-card>
+  </div>

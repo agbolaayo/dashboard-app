@@ -1,0 +1,27 @@
+<div class="remediation-entry-card" *ngIf="remediation">
+  <div class="remediation-content-wrapper">
+    <div class="remediation-header">
+      <div class="remediation-title">{{ remediation.title }}</div>
+    </div>
+    <div class="menu-group">
+      <div class="remediation-detail-item" *ngFor="let item of remediation.items; trackBy: trackByIndex">
+        <div class="icon-label-group">
+          <div class="circular-icon-bg" [style.background-color]="item.iconBgColor || 'var(--blue-100)'">
+            <img class="server-icon" [src]="item.iconPath" [alt]="item.primaryLabel + ' icon'" />
+          </div>
+          <div class="icon-associated-texts">
+            <div class="primary-label-small">{{ item.primaryLabel }}</div>
+            <div class="secondary-label-xsmall">{{ item.secondaryLabel }}</div>
+          </div>
+        </div>
+        <div class="vertical-divider-line"
+             [style.background-image]="item.dividerImagePath ? 'url(' + item.dividerImagePath + ')' : null"
+             [style.background-repeat]="item.dividerImagePath ? 'no-repeat' : null"
+             [style.background-position]="item.dividerImagePath ? 'center' : null"
+             [style.background-color]="item.dividerImagePath ? 'transparent' : 'var(--gray-soft200)'">
+        </div>
+        <p class="detail-text-block">{{ item.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

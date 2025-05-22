@@ -1,0 +1,20 @@
+<div class="summary-chart-card">
+  <div class="chart-card-title">{{ chartTitle }}</div>
+  <div class="chart-legend-area">
+    <div class="legend-column">
+      <div *ngFor="let item of legendItems; trackBy: trackById" class="legend-item-row" style="gap: 0px;"> <div class="legend-entry" (click)="toggleLegendItem(item)" tabindex="0" role="button" [attr.aria-pressed]="item.visible">
+          <div class="legend-color-marker" [ngClass]="item.colorClass"></div>
+          <div class="legend-item-count">{{ item.count }}</div>
+          <div class="legend-item-label">{{ item.label }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="doughnut-chart-visual">
+      <div class="doughnut-chart-image-container">
+        <div class="doughnut-chart-image" style="background-image: none;"> <canvas #contextualRiskChartCanvas style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+          <div class="doughnut-center-value">{{ doughnutCenterValue }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="sidebar-top-content">
+  <div class="sidebar-menu">
+    <div
+      *ngFor="let item of topMenuItems; trackBy: trackById"
+      class="menu-item"
+      [class.active]="item.active"
+      (click)="selectMenuItem(item)"
+      tabindex="0"
+      role="menuitem"
+      (keydown.enter)="selectMenuItem(item); $event.preventDefault()"
+      (keydown.space)="selectMenuItem(item); $event.preventDefault()"
+      [attr.aria-current]="item.active ? 'page' : null"
+    >
+      <div class="menu-item-link">
+        <img [src]="item.iconPath" class="menu-icon" [alt]="item.label + ' icon'" />
+        <div class="menu-item-label">{{ item.label }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-bottom-content">
+  <div class="menu-group"> <div
+      *ngFor="let item of bottomMenuItems; trackBy: trackById"
+      class="menu-item"
+      [class.active]="item.active"
+      (click)="selectMenuItem(item)"
+      tabindex="0"
+      role="menuitem"
+      (keydown.enter)="selectMenuItem(item); $event.preventDefault()"
+      (keydown.space)="selectMenuItem(item); $event.preventDefault()"
+      [attr.aria-current]="item.active ? 'page' : null"
+    >
+      <div class="menu-item-link">
+        <img [src]="item.iconPath" class="menu-icon" [alt]="item.label + ' icon'" />
+        <div class="menu-item-label">{{ item.label }}</div>
+      </div>
+    </div>
+  </div>
+
+  <img class="sidebar-divider" [src]="sidebarDividerPath" alt="Divider" role="separator"/>
+
+  <div class="user-profile-section">
+    <div class="user-profile-container">
+      <div class="user-info">
+        <img class="user-avatar" [src]="userProfile.avatarUrl" [alt]="userProfile.name + ' avatar'" />
+        <div class="user-details">
+          <div class="user-name">{{ userProfile.name }}</div>
+          <div class="user-role">{{ userProfile.role }}</div>
+        </div>
+      </div>
+      <div class="logout-icon-container" (click)="logout()" tabindex="0" role="button" (keydown.enter)="logout()" (keydown.space)="logout()" aria-label="Logout">
+        <div class="logout-icon">
+          <img class="logout-icon-svg" [src]="logoutIconPath" alt="" /> </div>
+      </div>
+    </div>
+    <div class="logout-icon-container-alt" (click)="logout()" tabindex="0" role="button" (keydown.enter)="logout()" (keydown.space)="logout()" aria-label="Logout">
+        <div class="logout-icon">
+            <img class="logout-icon-svg" [src]="logoutIconPath" alt="" />
+        </div>
+    </div>
+  </div>
+</div>

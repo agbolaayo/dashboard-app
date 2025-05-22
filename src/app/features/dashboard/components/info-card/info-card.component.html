@@ -1,0 +1,33 @@
+<div class="info-card description-card">
+  <div class="card-header-flex">
+    <div class="card-title">{{ descriptionTitle }}</div>
+  </div>
+  <p class="card-body-text">{{ descriptionText }}</p>
+
+  <div class="small-vertical-spacer"></div>
+  <div class="card-subtitle">{{ extraTitle }}</div>
+  <p class="card-body-text">{{ extraText }}</p>
+
+  <img class="sidebar-divider" [src]="cardDividerPath" alt="Divider" />
+
+  <div *ngFor="let detail of details; trackBy: trackByLabel" class="detail-row" [class.fixed-height]="detail.isFixedHight" [ngStyle]="detail.customStyle && detail.customStyle['height'] ? {'height': detail.customStyle['height']} : null">
+    <div class="detail-label" [ngStyle]="detail.customStyle && detail.customStyle['color'] ? {'color': detail.customStyle['color']} : null">
+        {{ detail.label }}
+    </div>
+    <ng-container *ngIf="isDetailValueString(detail.value); else objectValueTemplate">
+      <div class="detail-value">{{ detail.value }}</div>
+    </ng-container>
+    <ng-template #objectValueTemplate>
+      <div *ngIf="isDetailValueObject(detail.value)" class="detail-check-value">
+        <img *ngIf="detail.value.iconPath" class="check-icon" [src]="detail.value.iconPath" alt="Check" />
+        <div class="detail-value">{{ detail.value.text }}</div>
+      </div>
+    </ng-template>
+  </div>
+
+  <img class="sidebar-divider" [src]="cardDividerPath" alt="Divider" />
+  <div class="section-sub-heading">{{ remediationSectionTitle }}</div>
+
+  <app-remediation-entry-card *ngFor="let remediation of remediations; trackBy: trackByTitle" [remediation]="remediation">
+  </app-remediation-entry-card>
+</div>

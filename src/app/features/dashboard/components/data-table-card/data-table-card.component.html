@@ -1,0 +1,71 @@
+<div class="data-table-card"> <div class="table-content-area">
+    <div class="table-column asset-column">
+      <div class="table-header">
+        <div class="table-header-label">{{ headers[0].label }}</div>
+      </div>
+      <ng-container *ngIf="pagedRows.length > 0; else noAssetData">
+        <div *ngFor="let row of pagedRows; trackBy: trackById" class="table-cell">
+          <div class="asset-cell-content" [ngStyle]="row.id === 2 ? {'margin-right': '-4px'} : null">
+            <div class="asset-info-group">
+              <div class="asset-icon-bg" [style.background-color]="row.asset.iconBgColor">
+                <img class="asset-icon" [src]="row.asset.iconPath" [alt]="row.asset.primaryText + ' icon'" />
+              </div>
+              <div class="asset-text-details">
+                <div class="node-primary-text" style="font-size:13px;">{{ row.asset.primaryText }}</div>
+                <div class="secondary-label-xsmall">{{ row.asset.secondaryText }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noAssetData><div class="table-cell">No asset data.</div></ng-template>
+    </div>
+
+    <div class="table-column risk-column">
+      <div class="table-header">
+        <div class="table-header-label" [ngStyle]="headers[1].customStyle">{{ headers[1].label }}</div>
+      </div>
+      <ng-container *ngIf="pagedRows.length > 0; else noRiskData">
+        <div *ngFor="let row of pagedRows; trackBy: trackById" class="table-cell centered-content">
+          <div class="risk-status-tag" [style.background-color]="row.risk.statusBgColor">
+            <div class="risk-status-text" [style.color]="row.risk.statusTextColor">{{ row.risk.statusText }}</div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noRiskData><div class="table-cell centered-content">No risk data.</div></ng-template>
+    </div>
+  </div>
+
+  <div class="table-pagination" *ngIf="totalItems > 0">
+    <div class="pagination-controls">
+      <img
+        [src]="chevronLeftPath"
+        alt="Previous Page"
+        (click)="previousPage()"
+        [class.disabled]="currentPage === 1"
+        tabindex="0"
+        role="button"
+        aria-label="Previous page"
+        [attr.aria-disabled]="currentPage === 1" />
+      <div class="pagination-info">
+        <div class="pagination-text">{{ paginationText }}</div>
+      </div>
+      <img
+        [src]="chevronRightPath"
+        alt="Next Page"
+        (click)="nextPage()"
+        [class.disabled]="(currentPage * itemsPerPage) >= totalItems"
+        tabindex="0"
+        role="button"
+        aria-label="Next page"
+        [attr.aria-disabled]="(currentPage * itemsPerPage) >= totalItems" />
+    </div>
+  </div>
+  <div class="table-pagination" *ngIf="totalItems === 0">
+      <div class="pagination-controls">
+          <div class="pagination-info">
+              <div class="pagination-text">{{ paginationText }}</div>
+          </div>
+      </div>
+  </div>
+</div>

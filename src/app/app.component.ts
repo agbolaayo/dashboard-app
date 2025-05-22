@@ -1,12 +1,12 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: false, // <--- REMOVE THIS LINE if present
+  // imports: [DashboardModule], // <--- REMOVE THIS if using AppModule to declare/import DashboardModule
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-dashboard';
+  title: string = 'dashboard-app';
 }
