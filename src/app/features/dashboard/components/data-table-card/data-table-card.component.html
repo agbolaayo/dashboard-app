@@ -38,27 +38,29 @@
 
   <div class="table-pagination" *ngIf="totalItems > 0">
     <div class="pagination-controls">
-      <img
-        [src]="chevronLeftPath"
-        alt="Previous Page"
+      <span
+        class="pagination-arrow prev-arrow"
         (click)="previousPage()"
         [class.disabled]="currentPage === 1"
         tabindex="0"
         role="button"
         aria-label="Previous page"
-        [attr.aria-disabled]="currentPage === 1" />
+        [attr.aria-disabled]="currentPage === 1"
+      ></span>
+
       <div class="pagination-info">
         <div class="pagination-text">{{ paginationText }}</div>
       </div>
-      <img
-        [src]="chevronRightPath"
-        alt="Next Page"
+
+      <span
+        class="pagination-arrow next-arrow"
         (click)="nextPage()"
         [class.disabled]="(currentPage * itemsPerPage) >= totalItems"
         tabindex="0"
         role="button"
         aria-label="Next page"
-        [attr.aria-disabled]="(currentPage * itemsPerPage) >= totalItems" />
+        [attr.aria-disabled]="(currentPage * itemsPerPage) >= totalItems"
+      ></span>
     </div>
   </div>
   <div class="table-pagination" *ngIf="totalItems === 0">

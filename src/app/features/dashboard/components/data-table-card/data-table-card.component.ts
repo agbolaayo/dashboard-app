@@ -8,9 +8,6 @@ import { ImagePaths } from '../../../../core/constants/dashboard.constants';
   standalone: false
 })
 export class DataTableCardComponent {
-  // Make ImagePaths accessible if needed directly in this template (not currently the case)
-  // public imagePaths = ImagePaths;
-
   assetIconPath: string = ImagePaths.ASSET_TABLE_ICON;
   chevronLeftPath: string = ImagePaths.PAGINATION_CHEVRON_LEFT;
   chevronRightPath: string = ImagePaths.PAGINATION_CHEVRON_RIGHT;
@@ -48,7 +45,35 @@ export class DataTableCardComponent {
         statusBgColor: 'var(--red-100)',
         statusTextColor: 'var(--red-800)'
       }
-    }
+    },
+    {
+      id: 3,
+      asset: {
+        iconPath: this.assetIconPath,
+        iconBgColor: 'var(--blue-50)',
+        primaryText: 'Loremipsumdolorsit002',
+        secondaryText: '192.168.1.2'
+      },
+      risk: {
+        statusText: 'Critical',
+        statusBgColor: 'var(--red-100)',
+        statusTextColor: 'var(--red-800)'
+      }
+    },
+    {
+      id: 4,
+      asset: {
+        iconPath: this.assetIconPath,
+        iconBgColor: 'var(--blue-50)',
+        primaryText: 'Loremipsumdolorsit002',
+        secondaryText: '192.168.1.2'
+      },
+      risk: {
+        statusText: 'Critical',
+        statusBgColor: 'var(--red-100)',
+        statusTextColor: 'var(--red-800)'
+      }
+    },
   ];
 
   currentPage: number = 1;
@@ -83,13 +108,12 @@ export class DataTableCardComponent {
     }
   }
 
-  // Ensure this trackBy function is public and correctly referenced
   public trackById(index: number, item: TableRow | TableHeader): string | number {
-    if ((item as TableRow).id !== undefined) { // Check if it's a TableRow with an id
+    if ((item as TableRow).id !== undefined) { 
         return (item as TableRow).id;
-    } else if ((item as TableHeader).key) { // Check if it's a TableHeader with a key
+    } else if ((item as TableHeader).key) {
         return (item as TableHeader).key;
     }
-    return index; // Fallback to index
+    return index;
   }
 }
