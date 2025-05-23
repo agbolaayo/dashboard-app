@@ -1192,6 +1192,8 @@ a {
     background-color: var(--red-100);
     border-radius: 38px;
     border: 0px none;
+    min-width: 100px;
+    justify-content: center;
   }
 
   .risk-status-text {

@@ -9,8 +9,6 @@ import { ImagePaths } from '../../../../core/constants/dashboard.constants';
 })
 export class DataTableCardComponent {
   assetIconPath: string = ImagePaths.ASSET_TABLE_ICON;
-  chevronLeftPath: string = ImagePaths.PAGINATION_CHEVRON_LEFT;
-  chevronRightPath: string = ImagePaths.PAGINATION_CHEVRON_RIGHT;
 
   headers: TableHeader[] = [
     { key: 'asset', label: 'Asset' },
@@ -41,9 +39,9 @@ export class DataTableCardComponent {
         secondaryText: '192.168.1.2'
       },
       risk: {
-        statusText: 'Critical',
-        statusBgColor: 'var(--red-100)',
-        statusTextColor: 'var(--red-800)'
+        statusText: 'Medium',
+        statusBgColor: 'var(--yellow-600)',
+        statusTextColor: 'white'
       }
     },
     {
@@ -55,9 +53,9 @@ export class DataTableCardComponent {
         secondaryText: '192.168.1.2'
       },
       risk: {
-        statusText: 'Critical',
-        statusBgColor: 'var(--red-100)',
-        statusTextColor: 'var(--red-800)'
+        statusText: 'Low',
+        statusBgColor: 'var(--green-600)',
+        statusTextColor: 'white'
       }
     },
     {
@@ -69,15 +67,71 @@ export class DataTableCardComponent {
         secondaryText: '192.168.1.2'
       },
       risk: {
+        statusText: 'Medium',
+        statusBgColor: 'var(--yellow-600)',
+        statusTextColor: 'white'
+      }
+    },
+    {
+      id: 5,
+      asset: {
+        iconPath: this.assetIconPath,
+        iconBgColor: 'var(--blue-50)',
+        primaryText: 'Loremipsumdolorsit',
+        secondaryText: '192.168.1.1'
+      },
+      risk: {
         statusText: 'Critical',
         statusBgColor: 'var(--red-100)',
         statusTextColor: 'var(--red-800)'
       }
     },
+    {
+      id: 6,
+      asset: {
+        iconPath: this.assetIconPath,
+        iconBgColor: 'var(--blue-50)',
+        primaryText: 'Loremipsumdolorsit002',
+        secondaryText: '192.168.1.2'
+      },
+      risk: {
+        statusText: 'Low',
+        statusBgColor: 'var(--green-600)',
+        statusTextColor: 'white'
+      }
+    },
+    {
+      id: 7,
+      asset: {
+        iconPath: this.assetIconPath,
+        iconBgColor: 'var(--blue-50)',
+        primaryText: 'Loremipsumdolorsit002',
+        secondaryText: '192.168.1.2'
+      },
+      risk: {
+        statusText: 'Low',
+        statusBgColor: 'var(--green-600)',
+        statusTextColor: 'white'
+      }
+    },
+    {
+      id: 8,
+      asset: {
+        iconPath: this.assetIconPath,
+        iconBgColor: 'var(--blue-50)',
+        primaryText: 'Loremipsumdolorsit002',
+        secondaryText: '192.168.1.2'
+      },
+      risk: {
+        statusText: 'Medium',
+        statusBgColor: 'var(--yellow-600)',
+        statusTextColor: 'white'
+      }
+    }
   ];
 
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 3;
   totalItems: number = 0;
 
   constructor() {
