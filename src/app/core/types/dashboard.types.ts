@@ -33,6 +33,7 @@ export type RemediationItemDetail = {
 export type RemediationEntry = {
   title: string;
   items: RemediationItemDetail[];
+  additionalDetails?: string;
 };
 
 export type AttackNodeIconDetails = {
