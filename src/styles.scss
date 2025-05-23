@@ -505,7 +505,6 @@ a {
 
   .detail-value {
     position: relative;
-    width: fit-content;
     margin-top: -1px;
     font-family: "Public Sans", Helvetica;
     font-weight: 400;
@@ -513,7 +512,6 @@ a {
     font-size: 15px;
     letter-spacing: 0.15px;
     line-height: 22px;
-    white-space: nowrap;
   }
 
   .detail-check-value {
@@ -1480,7 +1478,6 @@ a {
     }
 
     app-content-panel {
-      padding: 70px 20px 20px;
       width: 100%;
     }
 
@@ -1521,27 +1518,14 @@ a {
   }
 
   @media (max-width: 480px) {
-    .detail-row {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 5px;
-    }
-
     .detail-label {
-      width: 100%;
+      width: 55%;
     }
 
-    .remediation-header {
-      gap: 10px;
-      flex-direction: column;
-      align-items: flex-start;
+    .server-details-box {
+      padding: 0px;
     }
-
-    .remediation-detail-item {
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    
     .vertical-divider-line {
       width: 100%;
       height: 1px;
