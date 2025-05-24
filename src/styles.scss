@@ -121,7 +121,7 @@ a {
     z-index: 100;
 
     &.desktop-collapsed {
-      width: 80px;
+      width: 60px;
 
       .sidebar-top-content,
       .sidebar-bottom-content {
@@ -158,6 +158,12 @@ a {
         flex-direction: column;
         align-items: center;
         gap: 10px;
+      }
+
+      .user-avatar {
+        position: relative;
+        width: 40px;
+        height: 40px;
       }
     }
   }
@@ -231,7 +237,7 @@ a {
     }
 
     &:hover {
-      background-color: var(--green-50);
+      background-color: #f9f9f9;
       cursor: pointer;
       .menu-item-label {
         color: var(--slate-700);
@@ -372,14 +378,28 @@ a {
     width: 40px;
     height: 40px;
     top: 24px;
-    left: 230px;
     cursor: pointer;
     z-index: 1000;
-    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 1;
+    visibility: visible;
+    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.2s ease-in-out, visibility 0s linear 0.2s;
 
     &.rotated {
       transform: rotate(180deg);
     }
+  }
+
+  .sidebar.desktop-collapsed ~ .sidebar-collapser-button.rotated {
+    opacity: 0;
+    visibility: hidden;
+    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.2s ease-in-out, visibility 0s linear 0s;
+  }
+
+  .sidebar.desktop-collapsed:hover ~ .sidebar-collapser-button.rotated,
+  .sidebar.desktop-collapsed ~ .sidebar-collapser-button.rotated:hover {
+    opacity: 1;
+    visibility: visible;
+    
   }
 
   app-content-panel {
@@ -556,6 +576,33 @@ a {
     width: 100%;
     margin: auto;
     cursor: pointer;
+
+    .inner-info-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      overflow: hidden; 
+    }
+  
+    .additional-info-text {
+      color: #525d73;
+      font-family: var(--font-family-primary);
+      font-size: 15px;
+      line-height: 22px;
+      letter-spacing: 0.01em;
+      width: 100%;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin-top 0.5s ease-in-out; 
+      margin-top: 0; 
+    }
+
+    &.active .additional-info-text {
+      max-height: 500px; 
+      opacity: 1;
+    }
   }
 
   .inner-info-card-header {
@@ -573,13 +620,6 @@ a {
     letter-spacing: 0.01em;
     font-weight: 700;
     opacity: 0.7;
-  }
-
-  .inner-info-card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
   }
 
   .server-details-box {
@@ -649,8 +689,9 @@ a {
 
   .vertical-divider {
     border-left: 0.75px solid #858d9d;
-    height: 40px;
-    align-self: center;
+    align-self: stretch;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 
   .server-description-text {
@@ -660,15 +701,6 @@ a {
     line-height: 22px;
     letter-spacing: 0.01em;
     flex: 1;
-  }
-
-  .additional-info-text {
-    color: #525d73;
-    font-family: var(--font-family-primary);
-    font-size: 15px;
-    line-height: 22px;
-    letter-spacing: 0.01em;
-    width: 100%;
   }
   
   .icon-label-group {
@@ -1464,7 +1496,6 @@ a {
 
     .sidebar-collapser-button {
       display: block;
-      left: 0 !important;
       transform: rotate(180deg);
 
       &.rotated {

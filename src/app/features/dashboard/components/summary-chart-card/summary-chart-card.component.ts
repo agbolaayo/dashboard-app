@@ -9,7 +9,6 @@ Chart.register(...registerables);
   selector: 'app-summary-chart-card',
   templateUrl: './summary-chart-card.component.html',
   standalone: false
-  // styleUrls: ['./summary-chart-card.component.scss']
 })
 export class SummaryChartCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('contextualRiskChartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
@@ -72,22 +71,8 @@ export class SummaryChartCardComponent implements OnInit, AfterViewInit, OnDestr
     if (this.chartInstance) {
       const itemIndex = this.legendItems.findIndex(legend => legend.id === item.id);
       if (itemIndex !== -1) {
-        // Chart.js v3+ uses isDatasetVisible and toggleDataVisibility for more complex scenarios.
-        // For simple doughnut segment hiding, we might need to filter data and update.
-        // A simpler way for visual toggle is to set data to 0 if not visible, and re-render.
-        // However, the original HTML script uses chart.toggleDataVisibility(index).
-        // Let's try to mimic that behavior by manipulating the visibility array Chart.js uses internally.
-        // This is a bit of a hack as direct segment visibility toggle isn't straightforward.
-        // A more robust way is to update the chart's data array.
-
-        // More robust approach: rebuild dataset
         const newData = this.legendItems.map(li => li.visible ? li.count : 0);
         this.chartInstance.data.datasets[0].data = newData;
-        // To truly hide (not just set to 0), you might need to filter labels and data:
-        // this.chartInstance.data.labels = this.legendItems.filter(i => i.visible).map(i => i.label);
-        // this.chartInstance.data.datasets[0].data = this.legendItems.filter(i => i.visible).map(i => i.count);
-        // this.chartInstance.data.datasets[0].backgroundColor = this.legendItems.filter(i => i.visible).map(i => i.colorValue);
-
         this.chartInstance.update();
       }
     }

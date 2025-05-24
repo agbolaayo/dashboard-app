@@ -10,7 +10,7 @@ import { ThemeService } from '../../../../core/services/theme.service';
 })
 export class SidebarComponent {
   topMenuItems: MenuItem[] = [
-    { id: 'top1', label: 'Lorem', iconPath: ImagePaths.MENU_7, link: '/' },
+    { id: 'top1', label: 'Lorem', iconPath: ImagePaths.MENU_7, link: '/', active: true},
     { id: 'top2', label: 'Lorem', iconPath: ImagePaths.MENU_3, link: '/' },
     { id: 'top3', label: 'Lorem', iconPath: ImagePaths.MENU_1, link: '/' },
     { id: 'top4', label: 'Lorem', iconPath: ImagePaths.MENU_ACTIVE, link: '/' },
@@ -35,9 +35,7 @@ export class SidebarComponent {
 
   constructor(public themeService: ThemeService) {}
 
-  logout(): void {
-    console.log('Logout clicked');
-  }
+  logout(): void {}
 
   public trackById(index: number, item: MenuItem): string {
     return item.id;

@@ -1,4 +1,4 @@
-<div class="inner-info-card" *ngIf="remediation" (click)="toggleDetails()">
+<div class="inner-info-card" *ngIf="remediation" (click)="toggleDetails()" [class.active]="detailsVisible">
   <div class="inner-info-card-header">
     <div class="inner-info-card-title">{{ remediation.title }}</div>
   </div>
