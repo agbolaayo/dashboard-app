@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, HostListener } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SidebarConfig } from '../constants/dashboard.constants';
 
@@ -6,39 +6,56 @@ import { SidebarConfig } from '../constants/dashboard.constants';
   providedIn: 'root'
 })
 export class ThemeService {
-  private isSidebarCollapsedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isSidebarCollapsed$: Observable<boolean> = this.isSidebarCollapsedSubject.asObservable();
+  private isDesktopSidebarCollapsedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isDesktopSidebarCollapsed$: Observable<boolean> = this.isDesktopSidebarCollapsedSubject.asObservable();
 
   private isMobileSidebarVisibleSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isMobileSidebarVisible$: Observable<boolean> = this.isMobileSidebarVisibleSubject.asObservable();
 
+  private isMobileViewSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.checkIsMobileView());
+  public isMobileView$: Observable<boolean> = this.isMobileViewSubject.asObservable();
+
   constructor() {
     this.handleResize();
+    window.addEventListener('resize', this.handleResize.bind(this));
   }
 
-  toggleSidebarCollapse(): void {
-    this.isSidebarCollapsedSubject.next(!this.isSidebarCollapsedSubject.value);
-  }
-
-  toggleMobileSidebarVisibility(): void {
-    this.isMobileSidebarVisibleSubject.next(!this.isMobileSidebarVisibleSubject.value);
-    // If desktop collapser is visible and sidebar is manually collapsed, respect that
-    if (window.innerWidth <= 1200 && this.isSidebarCollapsedSubject.value && this.isMobileSidebarVisibleSubject.value) {
-        // This logic might need refinement depending on exact desired behavior on mobile when desktop is collapsed
-    }
-  }
-
-  get sidebarCurrentWidth(): number {
-    return this.isSidebarCollapsedSubject.value ? SidebarConfig.COLLAPSED_WIDTH : SidebarConfig.INITIAL_WIDTH;
+  private checkIsMobileView(): boolean {
+    return window.innerWidth <= SidebarConfig.MOBILE_BREAKPOINT;
   }
 
   private handleResize(): void {
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 1200) {
-        if (this.isMobileSidebarVisibleSubject.value) {
-          this.isMobileSidebarVisibleSubject.next(false);
-        }
-      }
-    });
+    const mobileView = this.checkIsMobileView();
+    if (this.isMobileViewSubject.value !== mobileView) {
+      this.isMobileViewSubject.next(mobileView);
+    }
+
+    if (!mobileView && this.isMobileSidebarVisibleSubject.value) {
+      this.isMobileSidebarVisibleSubject.next(false);
+    }
+  }
+
+  public toggleDesktopSidebarCollapse(): void {
+    if (!this.checkIsMobileView()) {
+      this.isDesktopSidebarCollapsedSubject.next(!this.isDesktopSidebarCollapsedSubject.value);
+    }
+  }
+
+  public toggleMobileSidebarVisibility(): void {
+    if (this.checkIsMobileView()) {
+      this.isMobileSidebarVisibleSubject.next(!this.isMobileSidebarVisibleSubject.value);
+    }
+  }
+
+  public toggleSidebar(): void {
+    if (this.checkIsMobileView()) {
+      this.toggleMobileSidebarVisibility();
+    } else {
+      this.toggleDesktopSidebarCollapse();
+    }
+  }
+
+  get desktopSidebarCurrentWidth(): number {
+    return this.isDesktopSidebarCollapsedSubject.value ? SidebarConfig.COLLAPSED_WIDTH : SidebarConfig.INITIAL_WIDTH;
   }
 }

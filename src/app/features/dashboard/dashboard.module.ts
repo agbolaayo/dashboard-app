@@ -9,7 +9,6 @@ import { DataTableCardComponent } from './components/data-table-card/data-table-
 import { SummaryChartCardComponent } from './components/summary-chart-card/summary-chart-card.component';
 import { RemediationEntryCardComponent } from './components/remediation-entry-card/remediation-entry-card.component';
 
-
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -25,7 +24,7 @@ import { RemediationEntryCardComponent } from './components/remediation-entry-ca
     CommonModule
   ],
   exports: [
-    DashboardComponent // Export if app.component directly uses it
+    DashboardComponent
   ]
 })
 export class DashboardModule { }

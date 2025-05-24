@@ -40,8 +40,8 @@ export class DataTableCardComponent {
       },
       risk: {
         statusText: 'Medium',
-        statusBgColor: 'var(--yellow-600)',
-        statusTextColor: 'white'
+        statusBgColor: 'var(--yellow-100)',
+        statusTextColor: 'var(--yellow-600)'
       }
     },
     {
@@ -54,8 +54,8 @@ export class DataTableCardComponent {
       },
       risk: {
         statusText: 'Low',
-        statusBgColor: 'var(--green-600)',
-        statusTextColor: 'white'
+        statusBgColor: 'var(--green-50)',
+        statusTextColor: 'var(--green-600)'
       }
     },
     {
@@ -68,8 +68,8 @@ export class DataTableCardComponent {
       },
       risk: {
         statusText: 'Medium',
-        statusBgColor: 'var(--yellow-600)',
-        statusTextColor: 'white'
+        statusBgColor: 'var(--yellow-100)',
+        statusTextColor: 'var(--yellow-600)'
       }
     },
     {
@@ -96,8 +96,8 @@ export class DataTableCardComponent {
       },
       risk: {
         statusText: 'Low',
-        statusBgColor: 'var(--green-600)',
-        statusTextColor: 'white'
+        statusBgColor: 'var(--green-50)',
+        statusTextColor: 'var(--green-600)'
       }
     },
     {
@@ -110,8 +110,8 @@ export class DataTableCardComponent {
       },
       risk: {
         statusText: 'Low',
-        statusBgColor: 'var(--green-600)',
-        statusTextColor: 'white'
+        statusBgColor: 'var(--green-50)',
+        statusTextColor: 'var(--green-600)'
       }
     },
     {
@@ -124,8 +124,8 @@ export class DataTableCardComponent {
       },
       risk: {
         statusText: 'Medium',
-        statusBgColor: 'var(--yellow-600)',
-        statusTextColor: 'white'
+        statusBgColor: 'var(--yellow-100)',
+        statusTextColor: 'var(--yellow-600)'
       }
     }
   ];

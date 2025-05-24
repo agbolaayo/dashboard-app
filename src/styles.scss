@@ -23,6 +23,7 @@
   --red-100: rgba(255, 226, 224, 1);
   --gray-soft200: rgba(194, 198, 206, 1);
   --night-blue: rgba(56, 56, 116, 1);
+  --yellow-100: rgb(246, 238, 209);
   --yellow-600: rgba(235, 166, 34, 1);
   --grayscale-gray-7: rgba(101, 101, 117, 1);
   --font-family-primary: "Public Sans", Helvetica;
@@ -119,7 +120,7 @@ a {
     transition: width 0.3s ease-in-out, transform 0.3s ease-in-out;
     z-index: 100;
 
-    &.collapsed {
+    &.desktop-collapsed {
       width: 80px;
 
       .sidebar-top-content,
@@ -194,18 +195,46 @@ a {
     flex: 0 0 auto;
     border-radius: 8px;
     overflow: hidden;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    
+    .menu-icon {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      transition: filter 0.2s ease-in-out;
+    }
 
-    &:hover {
-      background-color: var(--gray-soft100);
-      cursor: pointer;
+    .menu-item-label {
+      position: relative;
+      flex: 1;
+      margin-top: -1px;
+      font-family: var(--font-family-primary);
+      font-weight: var(--basic-typography-h6-font-weight);
+      color: var(--gray-soft700);
+      font-size: var(--basic-typography-h6-font-size);
+      letter-spacing: var(--basic-typography-h6-letter-spacing);
+      line-height: var(--basic-typography-h6-line-height);
+      font-style: var(--basic-typography-h6-font-style);
+      transition: color 0.2s ease-in-out;
+    }
+
+    &.active .menu-icon,
+    &:hover .menu-icon {
+      filter: brightness(0%);
     }
 
     &.active {
       background-color: var(--green-50);
+      .menu-item-label {
+        color: var(--slate-700);
+      }
+    }
 
-      &:hover {
-        background-color: var(--green-100);
+    &:hover {
+      background-color: var(--green-50);
+      cursor: pointer;
+      .menu-item-label {
+        color: var(--slate-700);
       }
     }
   }
@@ -218,26 +247,7 @@ a {
     flex: 1;
     flex-grow: 1;
   }
-
-  .menu-icon {
-    position: relative;
-    width: 20px;
-    height: 20px;
-  }
-
-  .menu-item-label {
-    position: relative;
-    flex: 1;
-    margin-top: -1px;
-    font-family: var(--font-family-primary);
-    font-weight: var(--basic-typography-h6-font-weight);
-    color: var(--gray-soft700);
-    font-size: var(--basic-typography-h6-font-size);
-    letter-spacing: var(--basic-typography-h6-letter-spacing);
-    line-height: var(--basic-typography-h6-line-height);
-    font-style: var(--basic-typography-h6-font-style);
-  }
-
+  
   .sidebar-bottom-content {
     display: flex;
     flex-direction: column;
@@ -362,7 +372,7 @@ a {
     width: 40px;
     height: 40px;
     top: 24px;
-    left: 230px; // This will be managed by JS, but set initial
+    left: 230px;
     cursor: pointer;
     z-index: 1000;
     transition: left 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -373,15 +383,9 @@ a {
   }
 
   app-content-panel {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    flex-shrink: 1;
-    min-width: 0;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+    width: 100%;
     padding: 27px 0px;
+    padding-right: 20px;
     position: relative;
   }
 
@@ -404,7 +408,6 @@ a {
     align-self: stretch;
     width: 100%;
     flex: 0 0 auto;
-    padding: 0 20px;
   }
 
   .info-card {
@@ -544,7 +547,7 @@ a {
     background: #ffffff;
     border-radius: 15px;
     border: 1px solid #f0f1f3;
-    padding: 18px;
+    padding: 13px 18px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -904,7 +907,7 @@ a {
     align-self: stretch;
     font-family: "Public Sans", Helvetica;
     font-weight: 500;
-    color: var(--white); // Note: This was #ffffff, changed to var if available, else keep #ffffff if specific.
+    color: var(--white);
     font-size: 9.4px;
     text-align: center;
     letter-spacing: 0;
@@ -1011,15 +1014,14 @@ a {
     flex: 0 0 auto;
   }
 
-  .tag-icon-background { // Assuming this class was for the img, if img has specific bg, it should be applied directly or via its own class
+  .tag-icon-background {
     position: relative;
     width: 25px;
     height: 25px;
-    // background-image: url(images/rectangle-9815.svg); // Path needs to be updated for Angular assets
     background-size: 100% 100%;
   }
 
-  .tag-icon-positioner { // Likely for an icon within the background, or the img tag itself
+  .tag-icon-positioner {
     position: relative;
     width: 18px;
     height: 18px;
@@ -1045,9 +1047,7 @@ a {
     &.high {
       color: var(--colorsorange);
     }
-    &.medium {
-      // No specific color, inherits default or var(--text) if defined elsewhere
-    }
+    &.medium {}
     &.low {
       color: var(--green-700);
     }
@@ -1088,7 +1088,7 @@ a {
     &.risk-column {
       flex: 1;
       flex-grow: 1;
-      height: 170px; // Consider if this height should be dynamic
+      height: 170px;
     }
   }
 
@@ -1293,7 +1293,7 @@ a {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 20px; // HTML inline style might override this, SCSS reflects CSS structure
+    gap: 20px;
     position: relative;
     flex: 0 0 auto;
   }
@@ -1301,7 +1301,6 @@ a {
   .legend-item-row {
     display: inline-flex;
     align-items: center;
-    // gap: 20px; // HTML inline style might override this (was 0px), SCSS reflects CSS structure
     position: relative;
     flex: 0 0 auto;
   }
@@ -1436,8 +1435,7 @@ a {
     }
   }
 
-  // Responsive styles
-  @media (max-width: 1200px) {
+  @media (max-width: 768px) {
     .main-structure {
       flex-direction: column;
       gap: 0;
@@ -1445,41 +1443,38 @@ a {
 
     .sidebar {
       position: fixed;
-      left: -250px; // Initial position, will be toggled by JS/Angular
+      left: 0;
+      width: 250px;
+      transform: translateX(-100%);
       top: 0;
       height: 100vh;
       z-index: 1000;
       transition: transform 0.3s ease-in-out;
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      background-color: var(--white); 
 
-      &.visible {
-        transform: translateX(250px);
-      }
+      &.mobile-visible {
+        transform: translateX(0);
 
-      // &.collapsed handling might need adjustment with .visible
-      // Original CSS had specific rules for .sidebar.collapsed.visible
-      // This might need to be driven by component logic rather than pure CSS if sidebar cannot be collapsed and visible simultaneously in mobile.
-      // For now, reflecting the provided CSS:
-      &.collapsed {
-        width: 250px; // On mobile, collapsed might mean full width when shown.
-        // transform: translateX(0); // This would show it normally, not as an overlay.
-
-        &.visible {
-          transform: translateX(250px); // This implies it slides out from its original collapsed state logic.
+        .menu-item-label {
+          display: block;
         }
       }
     }
 
     .sidebar-collapser-button {
-      display: none;
+      display: block;
+      left: 0 !important;
+      transform: rotate(180deg);
+
+      &.rotated {
+        transform: none !important;
+        left: 235px !important;
+      }
     }
 
     .mobile-menu-toggle {
       display: block;
-    }
-
-    app-content-panel {
-      width: 100%;
     }
 
     .content-row {
@@ -1534,23 +1529,6 @@ a {
   }
 }
 
-a, button, input, select, h1, h2, h3, h4, h5, * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  border: none;
-  text-decoration: none;
-  background: none;
-
-  -webkit-font-smoothing: antialiased;
-}
-  
-menu, ol, ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
 .pagination-arrow {
   display: inline-block;
   height: 20px;
@@ -1578,4 +1556,21 @@ menu, ol, ul {
 .prev-arrow.disabled {
   background-image: url('../public/assets/images/chevron_left_disabled.svg');
   cursor: not-allowed;
+}
+
+a, button, input, select, h1, h2, h3, h4, h5, * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  background: none;
+
+  -webkit-font-smoothing: antialiased;
+}
+  
+menu, ol, ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }

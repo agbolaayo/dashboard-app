@@ -1,7 +1,6 @@
 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_3259_162)">
 <rect x="4" y="3" width="32" height="32" rx="16" fill="#00732E" shape-rendering="crispEdges"/>
-<rect x="5.5" y="4.5" width="29" height="29" rx="14.5" stroke="#F0F1F3" stroke-width="3" shape-rendering="crispEdges"/>
 <path d="M21.4 24.4L16 19L21.4 13.6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <defs>

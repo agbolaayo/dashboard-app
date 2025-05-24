@@ -4,6 +4,7 @@ export type MenuItem = {
   iconPath: string;
   active?: boolean;
   action?: () => void;
+  link?: string;
 };
 
 export type UserProfile = {
@@ -44,9 +45,8 @@ export type AttackNodeIconDetails = {
 export type AttackNodeStatusBadge = {
   bgColor: string;
   iconPath: string;
-  // Added to match usage in AttackPathCardComponent for grouped server nodes
-  isOverlay?: boolean; // To differentiate between venetian mask overlay and server shield overlay
-  customShieldStyle?: Record<string, string>; // For specific positioning like left: '28px'
+  isOverlay?: boolean;
+  customShieldStyle?: Record<string, string>;
 };
 
 export type AttackNode = {
@@ -54,9 +54,9 @@ export type AttackNode = {
   type: 'single' | 'grouped-vertical';
   primaryText: string;
   secondaryText?: string;
-  icon: AttackNodeIconDetails | string; // Required for all AttackNode types
+  icon: AttackNodeIconDetails | string;
   statusBadge?: AttackNodeStatusBadge;
-  nodes?: AttackNode[]; // Only for type 'grouped-vertical'
+  nodes?: AttackNode[];
   nodeStyle?: Record<string, string>;
   iconWrapperStyle?: Record<string, string>;
   textContainerStyle?: Record<string, string>;
@@ -64,7 +64,7 @@ export type AttackNode = {
   secondaryTextStyle?: Record<string, string>;
 };
 
-// Ensure AttackPathConnection is defined and exported
+
 export type AttackPathConnectionType = 'connector-image' | 'connector-group';
 
 export type AttackPathConnection = {

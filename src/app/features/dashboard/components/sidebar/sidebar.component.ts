@@ -9,21 +9,19 @@ import { ThemeService } from '../../../../core/services/theme.service';
   standalone: false
 })
 export class SidebarComponent {
-  // public imagePaths = ImagePaths; // Make available if ImagePaths were directly used in sidebar template
-
   topMenuItems: MenuItem[] = [
-    { id: 'top1', label: 'Lorem', iconPath: ImagePaths.MENU_7 },
-    { id: 'top2', label: 'Lorem', iconPath: ImagePaths.MENU_3 },
-    { id: 'top3', label: 'Lorem', iconPath: ImagePaths.MENU_1 },
-    { id: 'top4', label: 'Lorem', iconPath: ImagePaths.MENU_ACTIVE, active: true },
-    { id: 'top5', label: 'Lorem', iconPath: ImagePaths.MENU_5 },
-    { id: 'top6', label: 'Lorem', iconPath: ImagePaths.MENU_6 },
-    { id: 'top7', label: 'Lorem', iconPath: ImagePaths.MENU_2 },
+    { id: 'top1', label: 'Lorem', iconPath: ImagePaths.MENU_7, link: '/' },
+    { id: 'top2', label: 'Lorem', iconPath: ImagePaths.MENU_3, link: '/' },
+    { id: 'top3', label: 'Lorem', iconPath: ImagePaths.MENU_1, link: '/' },
+    { id: 'top4', label: 'Lorem', iconPath: ImagePaths.MENU_ACTIVE, link: '/' },
+    { id: 'top5', label: 'Lorem', iconPath: ImagePaths.MENU_5, link: '/' },
+    { id: 'top6', label: 'Lorem', iconPath: ImagePaths.MENU_6, link: '/' },
+    { id: 'top7', label: 'Lorem', iconPath: ImagePaths.MENU_2, link: '/' },
   ];
 
   bottomMenuItems: MenuItem[] = [
-    { id: 'bottom1', label: 'Lorem', iconPath: ImagePaths.MENU_4 },
-    { id: 'bottom2', label: 'Lorem', iconPath: ImagePaths.MENU_8 },
+    { id: 'bottom1', label: 'Lorem', iconPath: ImagePaths.MENU_4, link: '/' },
+    { id: 'bottom2', label: 'Lorem', iconPath: ImagePaths.MENU_8, link: '/' },
   ];
 
   userProfile: UserProfile = {
@@ -37,20 +35,10 @@ export class SidebarComponent {
 
   constructor(public themeService: ThemeService) {}
 
-  selectMenuItem(selectedItem: MenuItem): void {
-    this.topMenuItems.forEach(item => item.active = false);
-    this.bottomMenuItems.forEach(item => item.active = false);
-    selectedItem.active = true;
-    if (selectedItem.action) {
-      selectedItem.action();
-    }
-  }
-
   logout(): void {
     console.log('Logout clicked');
   }
 
-  // trackById function made public
   public trackById(index: number, item: MenuItem): string {
     return item.id;
   }

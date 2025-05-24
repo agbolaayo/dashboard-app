@@ -4,37 +4,32 @@
       *ngFor="let item of topMenuItems; trackBy: trackById"
       class="menu-item"
       [class.active]="item.active"
-      (click)="selectMenuItem(item)"
-      tabindex="0"
+      tabindex="0" 
       role="menuitem"
-      (keydown.enter)="selectMenuItem(item); $event.preventDefault()"
-      (keydown.space)="selectMenuItem(item); $event.preventDefault()"
       [attr.aria-current]="item.active ? 'page' : null"
     >
-      <div class="menu-item-link">
+      <a [href]="item.link || '#'" class="menu-item-link" (click)="item.action ? item.action() : null; item.active = true">
         <img [src]="item.iconPath" class="menu-icon" [alt]="item.label + ' icon'" />
         <div class="menu-item-label">{{ item.label }}</div>
-      </div>
+      </a>
     </div>
   </div>
 </div>
 
 <div class="sidebar-bottom-content">
-  <div class="menu-group"> <div
+  <div class="menu-group">
+    <div
       *ngFor="let item of bottomMenuItems; trackBy: trackById"
       class="menu-item"
       [class.active]="item.active"
-      (click)="selectMenuItem(item)"
       tabindex="0"
       role="menuitem"
-      (keydown.enter)="selectMenuItem(item); $event.preventDefault()"
-      (keydown.space)="selectMenuItem(item); $event.preventDefault()"
       [attr.aria-current]="item.active ? 'page' : null"
     >
-      <div class="menu-item-link">
+      <a [href]="item.link || '#'" class="menu-item-link" (click)="item.action ? item.action() : null; item.active = true">
         <img [src]="item.iconPath" class="menu-icon" [alt]="item.label + ' icon'" />
         <div class="menu-item-label">{{ item.label }}</div>
-      </div>
+      </a>
     </div>
   </div>
 
