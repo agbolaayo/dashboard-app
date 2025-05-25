@@ -121,12 +121,38 @@ a {
     transition: width 0.3s ease-in-out, transform 0.3s ease-in-out;
     z-index: 100;
 
+    .collapsed-text {
+      display: none;
+    }
+
+    .logo-full {
+      display: none;
+      flex-direction: row;
+      gap: 9px;
+      align-items: center;
+      justify-content: flex-start;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .logo-full img {
+      flex-shrink: 0;
+      width: 30.35px;
+      height: 30.35px;
+      position: relative;
+      overflow: visible;
+    }
+
     &.desktop-collapsed {
       width: 80px;
 
       .sidebar-top-content,
       .sidebar-bottom-content {
         width: 100%;
+      }
+
+      .logo-full {
+        display: flex;
       }
 
       .user-profile-container {
@@ -141,6 +167,33 @@ a {
       .menu-item {
         padding: 10px 0;
         justify-content: center;
+        
+        .collapsed-text {
+          background: var(--green-50, #e9faf0);
+          border-radius: 12px;
+          padding: 0px 10px 0px 10px;
+          flex-direction: row;
+          gap: 10px;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          position: absolute;
+          left: 40px;
+          font-size: 13px;
+
+          text-align: left;
+          font-family: var(--font-family-primary);
+          font-size: var(--basic-typography-caption-font-size);
+          line-height: var(--basic-typography-body-2-line-height);
+          font-weight: var(--basic-typography-body-2-font-weight);
+          justify-content: flex-start;
+        }
+
+        &:hover {
+          .collapsed-text {
+            display: flex;
+          }
+        }
 
         &.active {
           background-color: #E9FAF0;
@@ -187,7 +240,7 @@ a {
     display: flex;
     flex-direction: column;
     width: 218px;
-    align-items: flex-start;
+    align-items: center;
     gap: 30px;
     position: relative;
     flex: 0 0 auto;
@@ -215,7 +268,6 @@ a {
     width: 100%;
     flex: 0 0 auto;
     border-radius: 8px;
-    overflow: hidden;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     
     .menu-icon {
@@ -1566,6 +1618,7 @@ a {
 
     .severity-tags-container {
       flex-wrap: wrap;
+      gap:0px;
     }
 
     .content-row > .data-table-card,
@@ -1676,7 +1729,7 @@ a {
 
     .info-card {
         box-shadow: none;
-        padding: 10px 15px;
+        padding: 10px 30px;
     }
 
     .row {

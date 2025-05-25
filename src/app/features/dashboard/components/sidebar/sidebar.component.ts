@@ -9,6 +9,7 @@ import { ThemeService } from '../../../../core/services/theme.service';
   standalone: false
 })
 export class SidebarComponent {
+  public logoFullPath: string = ImagePaths.LOGO_FULL;
   topMenuItems: MenuItem[] = [
     { id: 'top1', label: 'Lorem', iconPath: ImagePaths.MENU_7, link: '/'},
     { id: 'top2', label: 'Lorem', iconPath: ImagePaths.MENU_3, link: '/' },

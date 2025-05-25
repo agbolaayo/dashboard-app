@@ -29,6 +29,7 @@ export const ImagePaths = {
   ASSET_TABLE_ICON: 'assets/images/lucide-server-1.svg',
   PAGINATION_CHEVRON_LEFT: 'assets/images/chevron-right.png',
   PAGINATION_CHEVRON_RIGHT: 'assets/images/chevron-right-1.png',
+  LOGO_FULL: 'assets/images/logo-full.svg'
 };
 
 export const DefaultUser = {
