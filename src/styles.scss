@@ -962,7 +962,7 @@ a {
     letter-spacing: 0;
     line-height: 13.5px;
     white-space: normal;
-    word-break: break-word;
+    // word-break: break-word;
   }
 
   .node-secondary-text {
@@ -1540,7 +1540,7 @@ a {
 
     .content-row {
       flex-direction: column;
-      padding: 0 10px;
+      padding: 0 3px;
     }
 
     .description-card,
@@ -1672,6 +1672,19 @@ a {
 
     app-content-panel {
       padding-right: 0px;
+    }
+
+    .info-card {
+        box-shadow: none;
+        padding: 0px;
+    }
+
+    .row {
+      padding: 0px !important;
+    }
+
+    .attack-path-visual-container {
+      padding: 0px;
     }
   }
 }
