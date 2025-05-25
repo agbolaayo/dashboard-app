@@ -121,7 +121,7 @@ a {
     z-index: 100;
 
     &.desktop-collapsed {
-      width: 60px;
+      width: 80px;
 
       .sidebar-top-content,
       .sidebar-bottom-content {
@@ -231,6 +231,9 @@ a {
 
     &.active {
       background-color: var(--green-50);
+      &:hover {
+        background-color: var(--green-50);
+      }
       .menu-item-label {
         color: var(--slate-700);
       }
