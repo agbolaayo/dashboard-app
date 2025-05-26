@@ -165,10 +165,15 @@ button:focus-visible {
 
     &.desktop-collapsed {
       width: 80px;
+      padding: 28px 20px;
 
       .sidebar-top-content,
       .sidebar-bottom-content {
         width: 100%;
+      }
+
+      .sidebar-bottom-content {
+        gap:26px;
       }
 
       .logo-full {
@@ -182,6 +187,7 @@ button:focus-visible {
 
       .sidebar-menu {
         align-items: center;
+        gap: 8px;
       }
 
       .menu-item {
@@ -200,7 +206,7 @@ button:focus-visible {
           position: absolute;
           left: 40px;
           font-size: 13px;
-
+          color: #000803;
           text-align: left;
           font-family: var(--font-family-primary);
           font-size: var(--basic-typography-caption-font-size);
@@ -470,9 +476,10 @@ button:focus-visible {
 
   .sidebar-collapser-button {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    top: 24px;
+    width: 32px;
+    height: 32px;
+    left: 234px;
+    top: 27px;
     cursor: pointer;
     z-index: 1000;
     opacity: 1;
@@ -481,6 +488,8 @@ button:focus-visible {
 
     &.rotated {
       transform: rotate(180deg);
+      top: 24px;
+      left: 63px !important;
     }
   }
 
@@ -517,7 +526,7 @@ button:focus-visible {
     align-self: stretch;
     width: 100%;
     flex: 0 0 auto;
-    padding: 2px;
+    padding: 1px;
   }
 
   .content-row {
@@ -542,7 +551,7 @@ button:focus-visible {
 
   .description-card {
     width: 385px;
-    max-height: calc(100dvh - 54px);
+    max-height: calc(100dvh - 56px);
     gap: 12px;
     overflow-y: scroll;
 
@@ -895,7 +904,7 @@ button:focus-visible {
     border-radius: 15px;
     box-shadow: var(--xs);
     min-width: 0;
-    min-height: calc(100dvh - 54px);
+    min-height: calc(100dvh - 56px);
   }
 
   .section-main-title {
@@ -1226,7 +1235,6 @@ button:focus-visible {
     &.risk-column {
       flex: 1;
       flex-grow: 1;
-      height: 170px;
     }
   }
 
@@ -1259,7 +1267,7 @@ button:focus-visible {
 
   .table-cell {
     display: flex;
-    height: 62.8px;
+    height: 65px;
     align-items: center;
     padding: 16px 10px;
     position: relative;

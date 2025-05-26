@@ -11,7 +11,7 @@ export const ImagePaths = {
   SIDEBAR_DIVIDER: 'assets/images/vector-1.svg',
   USER_AVATAR: 'assets/images/logo--1--1.png',
   LOGOUT_ICON: 'assets/images/outlined.svg',
-  SIDEBAR_COLLAPSER: 'assets/images/collapser.svg',
+  SIDEBAR_COLLAPSER: 'assets/images/collapser.png',
   CARD_DIVIDER: 'assets/images/vector-1348.svg',
   CHECK_ICON: 'assets/images/lucide-check.svg',
   SERVER_ICON_BLUE_BG: 'assets/images/lucide-server-2.svg',
@@ -41,7 +41,7 @@ export const DefaultUser = {
 export const SidebarConfig = {
   INITIAL_WIDTH: 250,
   COLLAPSED_WIDTH: 80,
-  COLLAPSER_OFFSET: 20,
+  COLLAPSER_OFFSET: 16,
   MOBILE_COLLAPSER_OFFSET_CLOSED: 5,
   MOBILE_BREAKPOINT: 768,
 };
@@ -65,7 +65,7 @@ export const DoughnutChartOptions = {
       display: false
     },
     tooltip: {
-      enabled: false
+      enabled: true
     }
   }
 };

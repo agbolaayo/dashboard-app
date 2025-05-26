@@ -1,10 +1,11 @@
-<div class="data-table-card"> <div class="table-content-area">
+<div class="data-table-card" tabindex="0" (keydown)="onTableKeydown($event)">
+  <div class="table-content-area">
     <div class="table-column asset-column">
-      <div class="table-header">
+      <div class="table-header" role="columnheader">
         <div class="table-header-label">{{ headers[0].label }}</div>
       </div>
       <ng-container *ngIf="pagedRows.length > 0; else noAssetData">
-        <div *ngFor="let row of pagedRows; trackBy: trackById" class="table-cell">
+        <div *ngFor="let row of pagedRows; trackBy: trackById" class="table-cell" (click)="openModal(row)" (keydown.enter)="openModal(row)" (keydown.space)="openModal(row)" role="button" tabindex="0" [attr.aria-label]="'View details for ' + row.asset.primaryText">
           <div class="asset-cell-content" [ngStyle]="row.id === 2 ? {'margin-right': '-4px'} : null">
             <div class="asset-info-group">
               <div class="asset-icon-bg" [style.background-color]="row.asset.iconBgColor">
@@ -18,29 +19,31 @@
           </div>
         </div>
       </ng-container>
-      <ng-template #noAssetData><div class="table-cell">No asset data.</div></ng-template>
+      <ng-template #noAssetData><div class="table-cell" role="cell">No asset data.</div></ng-template>
     </div>
 
     <div class="table-column risk-column">
-      <div class="table-header">
+      <div class="table-header" role="columnheader">
         <div class="table-header-label" [ngStyle]="headers[1].customStyle">{{ headers[1].label }}</div>
       </div>
       <ng-container *ngIf="pagedRows.length > 0; else noRiskData">
-        <div *ngFor="let row of pagedRows; trackBy: trackById" class="table-cell centered-content">
+        <div *ngFor="let row of pagedRows; trackBy: trackById" class="table-cell centered-content" (click)="openModal(row)" (keydown.enter)="openModal(row)" (keydown.space)="openModal(row)" role="button" tabindex="0" [attr.aria-label]="'View details for ' + row.asset.primaryText + ', risk: ' + row.risk.statusText">
           <div class="risk-status-tag" [style.background-color]="row.risk.statusBgColor">
             <div class="risk-status-text" [style.color]="row.risk.statusTextColor">{{ row.risk.statusText }}</div>
           </div>
         </div>
       </ng-container>
-      <ng-template #noRiskData><div class="table-cell centered-content">No risk data.</div></ng-template>
+      <ng-template #noRiskData><div class="table-cell centered-content" role="cell">No risk data.</div></ng-template>
     </div>
   </div>
 
-  <div class="table-pagination" *ngIf="totalItems > 0">
+  <div class="table-pagination" *ngIf="totalItems > 0" role="navigation" aria-label="Table pagination">
     <div class="pagination-controls">
       <span
         class="pagination-arrow prev-arrow"
         (click)="previousPage()"
+        (keydown.enter)="onPaginationControlKeydown($event, 'prev')"
+        (keydown.space)="onPaginationControlKeydown($event, 'prev')"
         [class.disabled]="currentPage === 1"
         tabindex="0"
         role="button"
@@ -48,13 +51,15 @@
         [attr.aria-disabled]="currentPage === 1"
       ></span>
 
-      <div class="pagination-info">
+      <div class="pagination-info" aria-live="polite">
         <div class="pagination-text">{{ paginationText }}</div>
       </div>
 
       <span
         class="pagination-arrow next-arrow"
         (click)="nextPage()"
+        (keydown.enter)="onPaginationControlKeydown($event, 'next')"
+        (keydown.space)="onPaginationControlKeydown($event, 'next')"
         [class.disabled]="(currentPage * itemsPerPage) >= totalItems"
         tabindex="0"
         role="button"

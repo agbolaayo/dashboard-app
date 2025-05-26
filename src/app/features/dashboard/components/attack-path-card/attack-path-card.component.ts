@@ -1,3 +1,4 @@
+// src/app/features/dashboard/components/attack-path-card/attack-path-card.component.ts
 import { Component } from '@angular/core';
 import {
   AttackPathSegment,
@@ -22,7 +23,7 @@ export class AttackPathCardComponent {
 
   attackPathSegments: AttackPathSegment[] = [
     {
-      id: 'node1', type: 'single', primaryText: 'Loremipsumm', secondaryText: 'FW',
+      id: 'node1', type: 'single', primaryText: 'Loremipsumm',
       icon: { path: this.imagePaths.VENETIAN_MASK_ICON, style: {backgroundColor: 'var(--red-50)'} },
       statusBadge: { bgColor: 'var(--purple-500)', iconPath: this.imagePaths.BADGE_ICON_GROUP, isOverlay: true },
       primaryTextStyle: { marginRight: '-10.25px' },
@@ -156,7 +157,7 @@ export class AttackPathCardComponent {
           </div>
         </div>`
     },
-    'Loremipsu': { // For node2
+    'Loremipsu': {
       title: 'Loremipsu',
       html: `
         <div class="card-base card-3">
@@ -197,74 +198,125 @@ export class AttackPathCardComponent {
           </div>
         </div>`
     },
-     'Loremipsumm': { // For node1
+     'Loremipsumm': {
       title: 'Loremipsumm',
       html: `
-        <div class="card-base card-4">
-          <div class="card-content-wrapper">
-            <div class="card-header-section">
-              <div class="card-info-block">
-                <div class="card-icon-title-row">
-                  <div class="card-icon-container">
-                    <div class="card-icon-bg"></div>
-                    <img class="card-icon-main-svg" src="assets/images/lucide-server0.svg" alt="Server Icon" />
-                  </div>
-                  <div class="card-title-subtitle-block">
-                    <div class="card-title-text">Loremipsum</div>
-                  </div>
-                </div>
-                <div class="card-detail-row">
-                  <img class="card-detail-icon" src="assets/images/lucide-receipt-text0.svg" alt="Receipt Icon" />
-                  <div class="card-detail-label">Lorem:</div>
-                  <div class="card-tag card-tag-yellow">
-                    <div class="card-tag-text card-tag-yellow-text">Lorem “ipsum"</div>
-                  </div>
-                  <div class="card-tag card-tag-green">
-                    <div class="card-tag-text card-tag-green-text" style="font-family: var(--font-public-sans); font-weight: 700; font-size:15px;">Lorem</div>
-                  </div>
-                  <div class="card-detail-label">Loremipsum Loremipsum</div>
-                </div>
-                <div class="card-detail-row">
-                  <div class="card-tag card-tag-purple">
-                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
-                  </div>
-                  <div class="card-detail-label" style="margin-left:5px;">Loremipsum</div>
-                  <div class="card-tag card-tag-purple">
-                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
-                  </div>
-                  <div class="card-tag card-tag-purple">
-                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
-                  </div>
-                  <div class="card-tag card-tag-blue">
-                    <div class="card-tag-text card-tag-blue-text">lorem 1234,5678</div>
-                  </div>
-                </div>
-                <div class="card-detail-row">
-                  <img class="card-detail-icon" src="assets/images/lucide-receipt-text1.svg" alt="Receipt Icon" />
-                  <div class="card-detail-label">Lorem:</div>
-                  <div class="card-tag card-tag-yellow">
-                    <div class="card-tag-text card-tag-yellow-text">Lorem “ipsum"</div>
-                  </div>
-                  <div class="card-detail-label">Loremipsum Loremipsum</div>
-                </div>
-                <div class="card-detail-row">
-                  <div class="card-tag card-tag-purple">
-                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
-                  </div>
-                  <div class="card-tag card-tag-purple">
-                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
-                  </div>
-                  <div class="card-detail-label" style="margin-left:5px;">Loremipsum Loremipsum</div>
-                  <div class="card-tag card-tag-purple">
-                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
-                  </div>
-                  <div class="card-tag card-tag-purple">
-                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
-                  </div>
-                </div>
+        <div class="issue-summary-card">
+          <div class="issue-summary-card-content">
+            <div class="issue-summary-card-title-banner">
+              <div class="issue-summary-card-title">Lorem Ipsum Dolor Sit</div>
+            </div>
+            <div class="issue-summary-tag-cell tag-cell-red-type1 tag-cell-pos1">
+              <div class="issue-summary-tag tag-style-red">
+                <div class="issue-summary-tag-text text-style-red">1.2.3.4</div>
+              </div>
+            </div>
+            <div class="issue-summary-tag-cell tag-cell-red-type2 tag-cell-pos2">
+              <div class="issue-summary-tag tag-style-red">
+                <div class="issue-summary-tag-text text-style-red">1.2.3.4</div>
+              </div>
+            </div>
+            <div class="issue-summary-tag-cell tag-cell-red-type2 tag-cell-pos3">
+              <div class="issue-summary-tag tag-style-red">
+                <div class="issue-summary-tag-text text-style-red">1.2.3.4</div>
+              </div>
+            </div>
+            <div class="issue-summary-tag-cell tag-cell-red-type1 tag-cell-pos4">
+              <div class="issue-summary-tag tag-style-red">
+                <div class="issue-summary-tag-text text-style-red">1.2.3.4</div>
+              </div>
+            </div>
+            <div class="issue-summary-tag-cell tag-cell-red-type2 tag-cell-pos5">
+              <div class="issue-summary-tag tag-style-red">
+                <div class="issue-summary-tag-text text-style-red">1.2.3.4</div>
+              </div>
+            </div>
+            <div class="issue-summary-tag-cell tag-cell-red-type2 tag-cell-pos6">
+              <div class="issue-summary-tag tag-style-red">
+                <div class="issue-summary-tag-text text-style-red">1.2.3.4</div>
+              </div>
+            </div>
+            <div class="issue-summary-tag-cell empty-cell-placeholder empty-cell-pos1"></div>
+            <div class="issue-summary-tag-cell empty-cell-placeholder empty-cell-pos2"></div>
+            <div class="issue-summary-tag-cell empty-cell-placeholder empty-cell-pos3"></div>
+            <div class="issue-summary-tag-cell empty-cell-placeholder empty-cell-pos4"></div>
+            <div class="issue-summary-final-tag-container">
+              <div class="issue-summary-tag tag-style-purple">
+                <div class="issue-summary-tag-text text-style-purple">Lorem: 1.2.3.4</div>
               </div>
             </div>
           </div>
+        </div>
+      `
+    },
+    'Loremipsum (Card 4)': { // New entry for the card-4 modal
+        title: 'Loremipsum Details',
+        html: `
+        <div class="card-base card-4">
+            <div class="card-content-wrapper">
+                <div class="card-header-section">
+                    <div class="card-info-block">
+                        <div class="card-icon-title-row">
+                            <div class="card-icon-container">
+                                <div class="card-icon-bg"></div>
+                                <img class="card-icon-main-svg" src="assets/images/lucide-server0.svg" alt="Server Icon" />
+                            </div>
+                            <div class="card-title-subtitle-block">
+                                <div class="card-title-text">Loremipsum</div>
+                            </div>
+                        </div>
+                        <div class="card-detail-row">
+                            <img class="card-detail-icon" src="assets/images/lucide-receipt-text0.svg" alt="Receipt Icon" />
+                            <div class="card-detail-label">Lorem:</div>
+                            <div class="card-tag card-tag-yellow">
+                                <div class="card-tag-text card-tag-yellow-text">Lorem “ipsum"</div>
+                            </div>
+                            <div class="card-tag card-tag-green">
+                                <div class="card-tag-text card-tag-green-text" style="font-family: var(--font-public-sans); font-weight: 700; font-size:15px;">Lorem</div>
+                            </div>
+                            <div class="card-detail-label">Loremipsum Loremipsum</div>
+                        </div>
+                        <div class="card-detail-row">
+                            <div class="card-tag card-tag-purple">
+                                <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                            </div>
+                            <div class="card-detail-label" style="margin-left:5px;">Loremipsum</div>
+                            <div class="card-tag card-tag-purple">
+                                <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                            </div>
+                            <div class="card-tag card-tag-purple">
+                                <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                            </div>
+                            <div class="card-tag card-tag-blue">
+                                <div class="card-tag-text card-tag-blue-text">lorem 1234,5678</div>
+                            </div>
+                        </div>
+                        <div class="card-detail-row">
+                            <img class="card-detail-icon" src="assets/images/lucide-receipt-text1.svg" alt="Receipt Icon" />
+                            <div class="card-detail-label">Lorem:</div>
+                            <div class="card-tag card-tag-yellow">
+                                <div class="card-tag-text card-tag-yellow-text">Lorem “ipsum"</div>
+                            </div>
+                            <div class="card-detail-label">Loremipsum Loremipsum</div>
+                        </div>
+                        <div class="card-detail-row">
+                            <div class="card-tag card-tag-purple">
+                                <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                            </div>
+                            <div class="card-tag card-tag-purple">
+                                <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                            </div>
+                            <div class="card-detail-label" style="margin-left:5px;">Loremipsum Loremipsum</div>
+                            <div class="card-tag card-tag-purple">
+                                <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                            </div>
+                            <div class="card-tag card-tag-purple">
+                                <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>`
     }
   };
