@@ -4,9 +4,11 @@ import {
   AttackNode,
   SeverityTag,
   AttackNodeIconDetails,
-  AttackPathConnection
+  AttackPathConnection,
+  ModalData
 } from '../../../../core/types/dashboard.types';
 import { ImagePaths as IP } from '../../../../core/constants/dashboard.constants';
+import { ModalService } from '../../../../core/services/modal.service';
 
 @Component({
   selector: 'app-attack-path-card',
@@ -17,8 +19,6 @@ export class AttackPathCardComponent {
   public imagePaths = IP;
 
   mainTitle: string = "Lorem Lorem Lorem";
-  // cardDividerPath is used in the template directly via imagePaths.CARD_DIVIDER
-  // Ensure all image paths used in the template are accessed via `this.imagePaths` or just `imagePaths` in the template.
 
   attackPathSegments: AttackPathSegment[] = [
     {
@@ -31,7 +31,7 @@ export class AttackPathCardComponent {
     { type: 'connector-image', imagePath: this.imagePaths.PATH_CONNECTOR_IMAGE },
     { id: 'node2', type: 'single', primaryText: 'Loremipsu', icon: this.imagePaths.LOAD_BALANCER_ICON },
     { type: 'connector-image', imagePath: this.imagePaths.PATH_CONNECTOR_IMAGE },
-    { id: 'node3', type: 'single', primaryText: 'Loremipsu', icon: this.imagePaths.LOAD_BALANCER_ICON },
+    { id: 'node3', type: 'single', primaryText: 'Loremipsu', icon: this.imagePaths.LOAD_BALANCER_ICON }, // Assuming this might need a different card if card-4 is distinct
     { type: 'connector-group', imagePath: this.imagePaths.PATH_CONNECTOR_GROUP, style: { width: '208px', height: '109.05px' } },
     {
       id: 'node4-group-container',
@@ -79,9 +79,261 @@ export class AttackPathCardComponent {
     { type: 'low', label: 'Lorem', iconPath: this.imagePaths.SHIELD_LOW }
   ];
 
-  relatedAssetsTitle: string = "Lorem Ipsum Dolor Sit"; // This title precedes the table and chart
+  relatedAssetsTitle: string = "Lorem Ipsum Dolor Sit";
 
-  constructor() { }
+  private vulnerabilityCardHtmlMap: Record<string, {title: string, html: string}> = {
+    'Loremipsumdolorsit': {
+      title: 'Loremipsumdolorsit',
+      html: `
+        <div class="card-base card-1">
+          <div class="card-content-wrapper">
+            <div class="card-header-section">
+              <div class="card-info-block">
+                <div class="card-icon-title-row">
+                  <div class="card-icon-container">
+                    <div class="card-icon-bg"></div>
+                    <img class="card-icon-main-svg" src="assets/images/lucide-server0.svg" alt="Server Icon" />
+                    <div class="card-icon-indicator-bg"></div>
+                    <img class="card-icon-indicator-svg" src="assets/images/lucide-shield-x0.svg" alt="Shield Icon" />
+                  </div>
+                  <div class="card-title-subtitle-block">
+                    <div class="card-title-text">Loremipsumdolorsit</div>
+                    <div class="card-subtitle-text">192.168.1.1</div>
+                  </div>
+                </div>
+                <div class="card-detail-row">
+                  <img class="card-detail-icon" src="assets/images/lucide-receipt-text0.svg" alt="Receipt Icon" />
+                  <div class="card-detail-label">Lorem:</div>
+                  <div class="card-tag card-tag-yellow">
+                    <div class="card-tag-text card-tag-yellow-text">Lorem “ipsum"</div>
+                  </div>
+                </div>
+                <div class="card-detail-row">
+                  <div class="card-detail-label">Loremipsum</div>
+                  <div class="card-tag card-tag-blue">
+                    <div class="card-tag-text card-tag-blue-text">lorem 1234,5678</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`
+    },
+    'Loremipsumdolorsit002': {
+      title: 'Loremipsumdolorsit002',
+      html: `
+        <div class="card-base card-2">
+          <div class="card-content-wrapper">
+            <div class="card-header-section">
+              <div class="card-info-block">
+                <div class="card-icon-title-row">
+                  <div class="card-icon-container">
+                    <div class="card-icon-bg"></div>
+                    <img class="card-icon-main-svg" src="assets/images/lucide-server0.svg" alt="Server Icon" />
+                    <div class="card-icon-indicator-bg"></div>
+                    <img class="card-icon-indicator-svg" src="assets/images/lucide-shield-x0.svg" alt="Shield Icon" />
+                  </div>
+                  <div class="card-title-subtitle-block">
+                    <div class="card-title-text">Loremipsumdolorsit002</div>
+                    <div class="card-subtitle-text">192.168.1.2</div>
+                  </div>
+                </div>
+                <div class="card-detail-row">
+                  <img class="card-detail-icon" src="assets/images/lucide-receipt-text0.svg" alt="Receipt Icon" />
+                  <div class="card-detail-label">Lorem:</div>
+                  <div class="card-tag card-tag-yellow">
+                    <div class="card-tag-text card-tag-yellow-text">Lorem “ipsum"</div>
+                  </div>
+                </div>
+                <div class="card-detail-row">
+                  <div class="card-detail-label">Loremipsum</div>
+                  <div class="card-tag card-tag-blue">
+                    <div class="card-tag-text card-tag-blue-text">lorem 1234,5678</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`
+    },
+    'Loremipsu': { // For node2
+      title: 'Loremipsu',
+      html: `
+        <div class="card-base card-3">
+          <div class="card-content-wrapper">
+            <div class="card-header-section">
+              <div class="card-info-block">
+                <div class="card-icon-title-row">
+                  <div class="card-icon-container">
+                    <div class="card-icon-bg"></div>
+                    <img class="card-icon-main-svg" src="assets/images/lucide-server0.svg" alt="Server Icon" />
+                  </div>
+                  <div class="card-title-subtitle-block">
+                    <div class="card-title-text">Loremipsu</div>
+                  </div>
+                </div>
+                <div class="card-detail-row">
+                  <img class="card-detail-icon" src="assets/images/lucide-receipt-text0.svg" alt="Receipt Icon" />
+                  <div class="card-detail-label">Lorem:</div>
+                  <div class="card-detail-label">Loremipsum Loremipsum</div>
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                </div>
+                <div class="card-detail-row">
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                  <div class="card-detail-label" style="margin-left: 5px;">Loremipsum</div>
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`
+    },
+     'Loremipsumm': { // For node1
+      title: 'Loremipsumm',
+      html: `
+        <div class="card-base card-4">
+          <div class="card-content-wrapper">
+            <div class="card-header-section">
+              <div class="card-info-block">
+                <div class="card-icon-title-row">
+                  <div class="card-icon-container">
+                    <div class="card-icon-bg"></div>
+                    <img class="card-icon-main-svg" src="assets/images/lucide-server0.svg" alt="Server Icon" />
+                  </div>
+                  <div class="card-title-subtitle-block">
+                    <div class="card-title-text">Loremipsum</div>
+                  </div>
+                </div>
+                <div class="card-detail-row">
+                  <img class="card-detail-icon" src="assets/images/lucide-receipt-text0.svg" alt="Receipt Icon" />
+                  <div class="card-detail-label">Lorem:</div>
+                  <div class="card-tag card-tag-yellow">
+                    <div class="card-tag-text card-tag-yellow-text">Lorem “ipsum"</div>
+                  </div>
+                  <div class="card-tag card-tag-green">
+                    <div class="card-tag-text card-tag-green-text" style="font-family: var(--font-public-sans); font-weight: 700; font-size:15px;">Lorem</div>
+                  </div>
+                  <div class="card-detail-label">Loremipsum Loremipsum</div>
+                </div>
+                <div class="card-detail-row">
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                  <div class="card-detail-label" style="margin-left:5px;">Loremipsum</div>
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                  <div class="card-tag card-tag-blue">
+                    <div class="card-tag-text card-tag-blue-text">lorem 1234,5678</div>
+                  </div>
+                </div>
+                <div class="card-detail-row">
+                  <img class="card-detail-icon" src="assets/images/lucide-receipt-text1.svg" alt="Receipt Icon" />
+                  <div class="card-detail-label">Lorem:</div>
+                  <div class="card-tag card-tag-yellow">
+                    <div class="card-tag-text card-tag-yellow-text">Lorem “ipsum"</div>
+                  </div>
+                  <div class="card-detail-label">Loremipsum Loremipsum</div>
+                </div>
+                <div class="card-detail-row">
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                  <div class="card-detail-label" style="margin-left:5px;">Loremipsum Loremipsum</div>
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                  <div class="card-tag card-tag-purple">
+                    <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`
+    }
+  };
+
+  constructor(private modalService: ModalService) { }
+
+  openVulnerabilityModal(node: AttackNode): void {
+    const nodeKey = node.primaryText;
+    let cardData = this.vulnerabilityCardHtmlMap[nodeKey];
+
+    if (node.id === 'node3' && nodeKey === 'Loremipsu') {
+        cardData = {
+            title: 'Loremipsu (WAN)',
+            html: `
+              <div class="card-base card-3">
+                <div class="card-content-wrapper">
+                  <div class="card-header-section">
+                    <div class="card-info-block">
+                      <div class="card-icon-title-row">
+                        <div class="card-icon-container">
+                          <div class="card-icon-bg"></div>
+                          <img class="card-icon-main-svg" src="assets/images/lucide-server0.svg" alt="Server Icon" />
+                        </div>
+                        <div class="card-title-subtitle-block">
+                          <div class="card-title-text">Loremipsu</div>
+                        </div>
+                      </div>
+                      <div class="card-detail-row">
+                        <img class="card-detail-icon" src="assets/images/lucide-receipt-text0.svg" alt="Receipt Icon" />
+                        <div class="card-detail-label">Lorem:</div>
+                        <div class="card-detail-label">Loremipsum Loremipsum</div>
+                        <div class="card-tag card-tag-purple">
+                          <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                        </div>
+                      </div>
+                      <div class="card-detail-row">
+                        <div class="card-tag card-tag-purple">
+                          <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                        </div>
+                        <div class="card-detail-label" style="margin-left: 5px;">Loremipsum</div>
+                        <div class="card-tag card-tag-purple">
+                          <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                        </div>
+                        <div class="card-tag card-tag-purple">
+                          <div class="card-tag-text card-tag-purple-text">1.2.3.4</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `
+        };
+    }
+
+
+    if (!cardData) {
+      cardData = {
+        title: `${nodeKey} Details`,
+        html: `<div class="card-base"><div class="card-content-wrapper"><p>No specific card HTML pre-configured for ${nodeKey}.</p><p>ID: ${node.id}</p></div></div>`
+      };
+    }
+
+    const modalData: ModalData = {
+      title: cardData.title,
+      contentHtml: cardData.html
+    };
+    this.modalService.open(modalData);
+  }
 
   isAttackNode(segment: AttackPathSegment): segment is AttackNode {
     return 'icon' in segment && (segment.type === 'single' || segment.type === 'grouped-vertical');

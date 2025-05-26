@@ -119,3 +119,8 @@ export type ChartLegendItem = {
   colorValue: string;
   visible?: boolean;
 };
+
+export interface ModalData {
+  title: string;
+  contentHtml: string;
+}

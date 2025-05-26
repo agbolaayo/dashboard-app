@@ -5,7 +5,10 @@
         <div *ngIf="isAttackNode(segment) && (segment.type === 'single' || segment.type === 'grouped-vertical')"
              [class.attack-path-node]="segment.type === 'single'"
              [class.node-group-vertical]="segment.type === 'grouped-vertical'"
-             [ngStyle]="segment.nodeStyle">
+             [ngStyle]="segment.nodeStyle"
+             (click)="isAttackNode(segment) && openVulnerabilityModal(segment)"
+             role="button"
+             tabindex="0">
 
           <ng-container *ngIf="segment.type === 'single'">
             <div class="node-icon-wrapper" [ngStyle]="segment.iconWrapperStyle">
@@ -37,7 +40,10 @@
           </ng-container>
 
           <ng-container *ngIf="segment.type === 'grouped-vertical' && segment.nodes">
-            <div *ngFor="let subNode of segment.nodes; trackBy: trackById" class="node-subgroup">
+            <div *ngFor="let subNode of segment.nodes; trackBy: trackById" class="node-subgroup"
+                 (click)="openVulnerabilityModal(subNode); $event.stopPropagation()"
+                 role="button"
+                 tabindex="0">
                 <div class="attack-path-node" [ngStyle]="subNode.nodeStyle">
                     <div class="node-icon-wrapper" [ngStyle]="subNode.iconWrapperStyle">
                         <div class="node-icon-display" [ngStyle]="getIconStyle(subNode.icon)">

@@ -8,6 +8,7 @@ import { AttackPathCardComponent } from './components/attack-path-card/attack-pa
 import { DataTableCardComponent } from './components/data-table-card/data-table-card.component';
 import { SummaryChartCardComponent } from './components/summary-chart-card/summary-chart-card.component';
 import { RemediationEntryCardComponent } from './components/remediation-entry-card/remediation-entry-card.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,15 @@ import { RemediationEntryCardComponent } from './components/remediation-entry-ca
     AttackPathCardComponent,
     DataTableCardComponent,
     SummaryChartCardComponent,
-    RemediationEntryCardComponent
+    RemediationEntryCardComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    DashboardComponent
+    DashboardComponent,
+    ModalComponent
   ]
 })
 export class DashboardModule { }
