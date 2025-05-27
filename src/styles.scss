@@ -229,7 +229,7 @@ button:focus-visible {
           &:hover {
             background-color: #000803;
             .menu-icon {
-              filter: invert(99%) sepia(1%) saturate(316%) hue-rotate(198deg) brightness(118%) contrast(94%);
+              filter: brightness(125%);
             }
           }
         }
