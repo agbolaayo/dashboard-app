@@ -1,59 +1,111 @@
-# AngularDashboard
+# Angular Dashboard Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+An Angular-based dashboard application designed for displaying interactive data visualizations and UI components. Built with Angular CLI v19.2.13.
 
-## Development server
+## Table of Contents
 
-To start a local development server, run:
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Development Server](#development-server)
+- [Building the Project](#building-the-project)
+- [Running Unit Tests](#running-unit-tests)
+- [Application Structure](#application-structure)
+
+## Prerequisites
+
+Before you begin, ensure the following are installed:
+
+- **Node.js**: [Download here](https://nodejs.org)
+- **Angular CLI** (v19.2.13 recommended):
+
+```bash
+npm install -g @angular/cli@19.2.13
+````
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone <your-repository-url>
+cd <project-directory-name>
+```
+
+## Installation
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+## Development Server
+
+Run the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Open [http://localhost:4200](http://localhost:4200) to view the app. Use `-o` to auto-open the browser:
 
 ```bash
-ng generate component component-name
+ng serve -o
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Building the Project
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Build for development:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build for production:
 
-## Running unit tests
+```bash
+ng build --configuration production
+```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Running Unit Tests
+
+This project uses **Karma** as the test runner and **Jasmine** for writing unit tests.
+
+To run unit tests:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+This launches the Karma test runner, which opens a browser and displays test results. Tests re-run on file changes.
 
-For end-to-end (e2e) testing, run:
+## Application Structure
 
-```bash
-ng e2e
-```
+Key features and structure of the app include:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+* **Modular Dashboard Architecture**:
 
-## Additional Resources
+  * `DashboardModule` contains core components like:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    * `SidebarComponent`: Sidebar navigation
+    * `InfoCardComponent`, `DataTableCardComponent`, `AttackPathCardComponent`, etc.: Data display components
+    * `ModalComponent`: For dialogs
+
+* **Services**:
+
+  * `ThemeService`: Manages themes, mobile responsiveness, and UI state
+  * `ModalService`: Controls modals and their content
+
+* **Styling**:
+
+  * SCSS-based with global `styles.scss`
+  * Theming via CSS variables
+
+* **Typed Interfaces**:
+
+  * Strongly typed data models (e.g., `dashboard.types.ts`)
+
+* **Constants Management**:
+
+  * Config values centralized in `dashboard.constants.ts`
