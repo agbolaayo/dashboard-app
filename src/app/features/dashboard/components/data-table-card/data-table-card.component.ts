@@ -251,10 +251,10 @@ export class DataTableCardComponent {
   onTableKeydown(event: KeyboardEvent): void {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
-      this.previousPage(); // Corrected: ArrowLeft for previous
+      this.previousPage();
     } else if (event.key === 'ArrowRight') {
       event.preventDefault();
-      this.nextPage(); // Corrected: ArrowRight for next
+      this.nextPage();
     }
   }
 
