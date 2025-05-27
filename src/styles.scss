@@ -502,7 +502,10 @@ button:focus-visible {
   .sidebar.desktop-collapsed ~ .sidebar-collapser-button.rotated:hover {
     opacity: 1;
     visibility: visible;
-    
+  }
+
+  .sidebar.desktop-collapsed:hover .sidebar-menu .menu-icon {
+    filter: brightness(55%);
   }
 
   app-content-panel {
