@@ -8,7 +8,7 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-summary-chart-card',
   templateUrl: './summary-chart-card.component.html',
-  standalone: false,
+  standalone: false
 })
 export class SummaryChartCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('contextualRiskChartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
@@ -19,11 +19,10 @@ export class SummaryChartCardComponent implements OnInit, AfterViewInit, OnDestr
 
   legendItems: ChartLegendItem[] = [
     { id: 'critical', label: 'Critical', count: 2, colorClass: 'critical', colorValue: ChartColors.CRITICAL, visible: true },
-    { id: 'high', label: 'High', count: 4, colorClass: 'high', colorValue: ChartColors.HIGH, visible: true },
+    { id: 'high', label: 'High', count: 0, colorClass: 'high', colorValue: ChartColors.HIGH, visible: true },
     { id: 'medium', label: 'Medium', count: 3, colorClass: 'medium', colorValue: ChartColors.MEDIUM, visible: true },
-    { id: 'low', label: 'Low', count: 8, colorClass: 'low', colorValue: ChartColors.LOW, visible: true },
+    { id: 'low', label: 'Low', count: 3, colorClass: 'low', colorValue: ChartColors.LOW, visible: true },
   ];
-
   constructor() { }
 
   ngOnInit(): void {

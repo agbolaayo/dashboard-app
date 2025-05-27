@@ -9,7 +9,7 @@ import {
   ModalData,
   HoverPositionConfig
 } from '../../../../core/types/dashboard.types';
-import { ImagePaths as IP } from '../../../../core/constants/dashboard.constants';
+import { ImagePaths as IP, DashboardUIText } from '../../../../core/constants/dashboard.constants';
 import { ModalService } from '../../../../core/services/modal.service';
 
 @Component({
@@ -20,8 +20,7 @@ import { ModalService } from '../../../../core/services/modal.service';
 export class AttackPathCardComponent {
   public imagePaths = IP;
 
-  mainTitle: string = "Lorem Lorem Lorem";
-  private hoverWindowMaxWidth = 450; 
+  mainTitle: string = DashboardUIText.ATTACK_PATH_MAIN_TITLE;
   private hoverWindowEstimatedHeight = 200;
 
   attackPathSegments: AttackPathSegment[] = [
@@ -31,13 +30,13 @@ export class AttackPathCardComponent {
       statusBadge: { bgColor: 'var(--purple-500)', iconPath: this.imagePaths.BADGE_ICON_GROUP, isOverlay: true },
       primaryTextStyle: { marginRight: '-10.25px' },
       secondaryTextStyle: { color: '#ffffff' },
-      hoverPositionConfig: { 
-        vertical: { edge: 'bottom', offset: 10 }, 
-        horizontal: { edge: 'left', offset: -5 } 
+      hoverPositionConfig: {
+        vertical: { edge: 'bottom', offset: 10 },
+        horizontal: { edge: 'left', offset: -5 }
       }
     },
     { type: 'connector-image', imagePath: this.imagePaths.PATH_CONNECTOR_IMAGE },
-    { 
+    {
       id: 'node2', type: 'single', primaryText: 'Loremipsu', icon: this.imagePaths.LOAD_BALANCER_ICON,
       hoverPositionConfig: {
         vertical: { edge: 'bottom', offset: 5 },
@@ -92,7 +91,7 @@ export class AttackPathCardComponent {
           primaryTextStyle: { marginLeft: '-40.25px', marginRight: '-40.25px'},
           secondaryTextStyle: { color: 'var(--gray-soft500)'},
           hoverPositionConfig: {
-            vertical: { edge: 'bottom', offset: -25 },
+            vertical: { edge: 'bottom', offset: -55 },
             horizontal: { edge: 'left', offset: -300 }
           }
         }
@@ -106,7 +105,7 @@ export class AttackPathCardComponent {
     { type: 'low', label: 'Lorem', iconPath: this.imagePaths.SHIELD_LOW }
   ];
 
-  relatedAssetsTitle: string = "Lorem Ipsum Dolor Sit";
+  relatedAssetsTitle: string = DashboardUIText.ATTACK_PATH_RELATED_ASSETS_TITLE;
 
   public hoverContent: SafeHtml | null = null;
   public showHoverWindow: boolean = false;
@@ -441,7 +440,7 @@ export class AttackPathCardComponent {
       const targetRect = targetElement.getBoundingClientRect();
       const componentHostElement = this.elRef.nativeElement;
       const componentHostRect = componentHostElement.getBoundingClientRect();
-      
+
       const scrollableAncestor = componentHostElement.closest('app-content-panel');
       const scrollTop = scrollableAncestor ? scrollableAncestor.scrollTop : 0;
 
@@ -468,13 +467,6 @@ export class AttackPathCardComponent {
         }
       } else {
         calculatedLeft = targetRect.left - componentHostRect.left;
-      }
-      
-      const hoverEffectiveWidth = this.hoverWindowMaxWidth; 
-      const parentClientWidth = componentHostElement.clientWidth; 
-
-      if ((calculatedLeft + hoverEffectiveWidth) > parentClientWidth) {
-        calculatedLeft = (targetRect.right - componentHostRect.left) - hoverEffectiveWidth - 5;
       }
 
       if (calculatedLeft < 0) {
@@ -516,7 +508,13 @@ export class AttackPathCardComponent {
     return this.isIconDetails(iconInput) && iconInput.style ? iconInput.style : null;
   }
 
-  trackById(index: number, item: AttackPathSegment | SeverityTag | AttackNode): string | number {
-    return item && (item as any).id ? (item as any).id : index;
+  trackById(index: number, item: AttackPathSegment | SeverityTag | AttackNode): string {
+    if (item && (item as AttackNode).id) {
+      return (item as AttackNode).id;
+    }
+    if (item && (item as SeverityTag).type) {
+      return (item as SeverityTag).type + '-' + (item as SeverityTag).label;
+    }
+    return index.toString();
   }
 }
