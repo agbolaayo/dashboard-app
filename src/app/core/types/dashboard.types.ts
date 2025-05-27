@@ -49,6 +49,11 @@ export type AttackNodeStatusBadge = {
   customShieldStyle?: Record<string, string>;
 };
 
+export type HoverPositionConfig = {
+  vertical?: { edge: 'top' | 'bottom'; offset: number };
+  horizontal?: { edge: 'left' | 'right'; offset: number };
+};
+
 export type AttackNode = {
   id: string;
   type: 'single' | 'grouped-vertical';
@@ -62,6 +67,7 @@ export type AttackNode = {
   textContainerStyle?: Record<string, string>;
   primaryTextStyle?: Record<string, string>;
   secondaryTextStyle?: Record<string, string>;
+  hoverPositionConfig?: HoverPositionConfig;
 };
 
 

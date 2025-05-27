@@ -7,6 +7,8 @@
              [class.node-group-vertical]="segment.type === 'grouped-vertical'"
              [ngStyle]="segment.nodeStyle"
              (click)="isAttackNode(segment) && openVulnerabilityModal(segment)"
+             (mouseenter)="isAttackNode(segment) && onNodeMouseEnter($event, segment)"
+             (mouseleave)="isAttackNode(segment) && onNodeMouseLeave()"
              role="button"
              tabindex="0">
 
@@ -42,6 +44,8 @@
           <ng-container *ngIf="segment.type === 'grouped-vertical' && segment.nodes">
             <div *ngFor="let subNode of segment.nodes; trackBy: trackById" class="node-subgroup"
                  (click)="openVulnerabilityModal(subNode); $event.stopPropagation()"
+                 (mouseenter)="onNodeMouseEnter($event, subNode); $event.stopPropagation()"
+                 (mouseleave)="onNodeMouseLeave(); $event.stopPropagation()"
                  role="button"
                  tabindex="0">
                 <div class="attack-path-node" [ngStyle]="subNode.nodeStyle">
@@ -90,3 +94,10 @@
     <app-data-table-card class="col-xl-6"></app-data-table-card>
     <app-summary-chart-card class="col-xl-6"></app-summary-chart-card>
   </div>
+
+<div *ngIf="showHoverWindow && hoverContent"
+     class="attack-node-hover-window"
+     [style.top]="hoverWindowPosition.top"
+     [style.left]="hoverWindowPosition.left"
+     [innerHTML]="hoverContent">
+</div>

@@ -1,12 +1,13 @@
-// src/app/features/dashboard/components/attack-path-card/attack-path-card.component.ts
-import { Component } from '@angular/core';
+import { Component, HostListener, ElementRef, Renderer2, ChangeDetectorRef, ViewChild, SecurityContext } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   AttackPathSegment,
   AttackNode,
   SeverityTag,
   AttackNodeIconDetails,
   AttackPathConnection,
-  ModalData
+  ModalData,
+  HoverPositionConfig
 } from '../../../../core/types/dashboard.types';
 import { ImagePaths as IP } from '../../../../core/constants/dashboard.constants';
 import { ModalService } from '../../../../core/services/modal.service';
@@ -20,6 +21,8 @@ export class AttackPathCardComponent {
   public imagePaths = IP;
 
   mainTitle: string = "Lorem Lorem Lorem";
+  private hoverWindowMaxWidth = 450; 
+  private hoverWindowEstimatedHeight = 200;
 
   attackPathSegments: AttackPathSegment[] = [
     {
@@ -27,12 +30,27 @@ export class AttackPathCardComponent {
       icon: { path: this.imagePaths.VENETIAN_MASK_ICON, style: {backgroundColor: 'var(--red-50)'} },
       statusBadge: { bgColor: 'var(--purple-500)', iconPath: this.imagePaths.BADGE_ICON_GROUP, isOverlay: true },
       primaryTextStyle: { marginRight: '-10.25px' },
-      secondaryTextStyle: { color: '#ffffff' }
+      secondaryTextStyle: { color: '#ffffff' },
+      hoverPositionConfig: { 
+        vertical: { edge: 'bottom', offset: 10 }, 
+        horizontal: { edge: 'left', offset: -5 } 
+      }
     },
     { type: 'connector-image', imagePath: this.imagePaths.PATH_CONNECTOR_IMAGE },
-    { id: 'node2', type: 'single', primaryText: 'Loremipsu', icon: this.imagePaths.LOAD_BALANCER_ICON },
+    { 
+      id: 'node2', type: 'single', primaryText: 'Loremipsu', icon: this.imagePaths.LOAD_BALANCER_ICON,
+      hoverPositionConfig: {
+        vertical: { edge: 'bottom', offset: 5 },
+        horizontal: { edge: 'left', offset: -150 }
+      }
+    },
     { type: 'connector-image', imagePath: this.imagePaths.PATH_CONNECTOR_IMAGE },
-    { id: 'node3', type: 'single', primaryText: 'Loremipsu', icon: this.imagePaths.LOAD_BALANCER_ICON }, // Assuming this might need a different card if card-4 is distinct
+    { id: 'node3', type: 'single', primaryText: 'Loremipsu', icon: this.imagePaths.LOAD_BALANCER_ICON ,
+      hoverPositionConfig: {
+        vertical: { edge: 'bottom', offset: 10 },
+        horizontal: { edge: 'left', offset: -125 }
+      }
+    },
     { type: 'connector-group', imagePath: this.imagePaths.PATH_CONNECTOR_GROUP, style: { width: '208px', height: '109.05px' } },
     {
       id: 'node4-group-container',
@@ -53,7 +71,11 @@ export class AttackPathCardComponent {
           iconWrapperStyle: { width:'100%' },
           textContainerStyle: { width:'100%' },
           primaryTextStyle: { marginLeft: '-27.75px', marginRight: '-27.75px'},
-          secondaryTextStyle: { color: 'var(--gray-soft500)'}
+          secondaryTextStyle: { color: 'var(--gray-soft500)'},
+          hoverPositionConfig: {
+            vertical: { edge: 'top', offset: 200 },
+            horizontal: { edge: 'left', offset: -280 }
+          }
         },
         {
           id: 'node4-2', type: 'single', primaryText: 'Loremipsumdolorsit002', secondaryText: '192.168.1.2',
@@ -68,7 +90,11 @@ export class AttackPathCardComponent {
           iconWrapperStyle: { width:'100%' },
           textContainerStyle: { width:'100%' },
           primaryTextStyle: { marginLeft: '-40.25px', marginRight: '-40.25px'},
-          secondaryTextStyle: { color: 'var(--gray-soft500)'}
+          secondaryTextStyle: { color: 'var(--gray-soft500)'},
+          hoverPositionConfig: {
+            vertical: { edge: 'bottom', offset: -25 },
+            horizontal: { edge: 'left', offset: -300 }
+          }
         }
       ]
     }
@@ -81,6 +107,10 @@ export class AttackPathCardComponent {
   ];
 
   relatedAssetsTitle: string = "Lorem Ipsum Dolor Sit";
+
+  public hoverContent: SafeHtml | null = null;
+  public showHoverWindow: boolean = false;
+  public hoverWindowPosition: { top: string, left: string } = { top: '0px', left: '0px' };
 
   private vulnerabilityCardHtmlMap: Record<string, {title: string, html: string}> = {
     'Loremipsumdolorsit': {
@@ -249,7 +279,7 @@ export class AttackPathCardComponent {
         </div>
       `
     },
-    'Loremipsum (Card 4)': { // New entry for the card-4 modal
+    'Loremipsum (Card 4)': {
         title: 'Loremipsum Details',
         html: `
         <div class="card-base card-4">
@@ -321,7 +351,11 @@ export class AttackPathCardComponent {
     }
   };
 
-  constructor(private modalService: ModalService) { }
+  constructor(
+    private modalService: ModalService,
+    private sanitizer: DomSanitizer,
+    private elRef: ElementRef<HTMLElement>
+  ) { }
 
   openVulnerabilityModal(node: AttackNode): void {
     const nodeKey = node.primaryText;
@@ -385,6 +419,81 @@ export class AttackPathCardComponent {
       contentHtml: cardData.html
     };
     this.modalService.open(modalData);
+  }
+
+  onNodeMouseEnter(event: MouseEvent, node: AttackNode): void {
+    const nodeKey = node.primaryText;
+    let cardData = this.vulnerabilityCardHtmlMap[nodeKey];
+
+     if (node.id === 'node3' && nodeKey === 'Loremipsu') {
+        cardData = this.vulnerabilityCardHtmlMap['Loremipsu (WAN)'] || this.vulnerabilityCardHtmlMap['Loremipsu'];
+     }
+
+
+    if (!cardData && node.id.startsWith('node4')) {
+       cardData = this.vulnerabilityCardHtmlMap[nodeKey];
+    }
+
+
+    if (cardData) {
+      this.hoverContent = this.sanitizer.bypassSecurityTrustHtml(cardData.html);
+      const targetElement = event.currentTarget as HTMLElement;
+      const targetRect = targetElement.getBoundingClientRect();
+      const componentHostElement = this.elRef.nativeElement;
+      const componentHostRect = componentHostElement.getBoundingClientRect();
+      
+      const scrollableAncestor = componentHostElement.closest('app-content-panel');
+      const scrollTop = scrollableAncestor ? scrollableAncestor.scrollTop : 0;
+
+      let calculatedTop: number;
+      let calculatedLeft: number;
+
+      const config = node.hoverPositionConfig;
+
+      if (config?.vertical) {
+        if (config.vertical.edge === 'bottom') {
+          calculatedTop = (targetRect.bottom - componentHostRect.top + scrollTop) + config.vertical.offset;
+        } else {
+          calculatedTop = (targetRect.top - componentHostRect.top + scrollTop) - this.hoverWindowEstimatedHeight + config.vertical.offset;
+        }
+      } else {
+        calculatedTop = (targetRect.bottom - componentHostRect.top + scrollTop) + 5;
+      }
+
+      if (config?.horizontal) {
+        if (config.horizontal.edge === 'left') {
+          calculatedLeft = (targetRect.left - componentHostRect.left) + config.horizontal.offset;
+        } else {
+          calculatedLeft = (targetRect.right - componentHostRect.left) + config.horizontal.offset;
+        }
+      } else {
+        calculatedLeft = targetRect.left - componentHostRect.left;
+      }
+      
+      const hoverEffectiveWidth = this.hoverWindowMaxWidth; 
+      const parentClientWidth = componentHostElement.clientWidth; 
+
+      if ((calculatedLeft + hoverEffectiveWidth) > parentClientWidth) {
+        calculatedLeft = (targetRect.right - componentHostRect.left) - hoverEffectiveWidth - 5;
+      }
+
+      if (calculatedLeft < 0) {
+        calculatedLeft = 5;
+      }
+
+      this.hoverWindowPosition = {
+        top: `${calculatedTop}px`,
+        left: `${calculatedLeft}px`
+      };
+      this.showHoverWindow = true;
+    } else {
+      this.onNodeMouseLeave();
+    }
+  }
+
+  onNodeMouseLeave(): void {
+    this.showHoverWindow = false;
+    this.hoverContent = null;
   }
 
   isAttackNode(segment: AttackPathSegment): segment is AttackNode {

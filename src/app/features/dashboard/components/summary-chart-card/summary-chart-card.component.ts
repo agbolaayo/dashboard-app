@@ -1,20 +1,20 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Chart, registerables, ChartType, ChartData, ChartOptions } from 'chart.js';
 import { ChartLegendItem } from '../../../../core/types/dashboard.types';
-import { ChartColors, DoughnutChartOptions } from '../../../../core/constants/dashboard.constants';
+import { ChartColors, DoughnutChartOptions, DashboardUIText } from '../../../../core/constants/dashboard.constants';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-summary-chart-card',
   templateUrl: './summary-chart-card.component.html',
-  standalone: false
+  standalone: false,
 })
 export class SummaryChartCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('contextualRiskChartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
   private chartInstance: Chart | null = null;
 
-  chartTitle: string = "Contextual Risk";
+  chartTitle: string = DashboardUIText.SUMMARY_CHART_TITLE;
   doughnutCenterValue: number = 0;
 
   legendItems: ChartLegendItem[] = [
@@ -62,7 +62,7 @@ export class SummaryChartCardComponent implements OnInit, AfterViewInit, OnDestr
     this.chartInstance = new Chart(context, {
       type: 'doughnut',
       data: chartData,
-      options: DoughnutChartOptions as ChartOptions<'doughnut'> // Cast for stricter typing
+      options: DoughnutChartOptions as ChartOptions<'doughnut'>
     });
   }
 

@@ -107,7 +107,6 @@ button:focus-visible {
   height: 100%;
 
   .page-content-wrapper {
-    background-color: var(--gray-soft25);
     width: 100%;
     height: 100%;
     display: flex;
@@ -917,7 +916,6 @@ button:focus-visible {
     font-family: "Public Sans", Helvetica;
     font-weight: 700;
     white-space: nowrap;
-    margin-top: 20px;
   }
 
   .attack-path-visual-container {
@@ -1327,6 +1325,7 @@ button:focus-visible {
     justify-content: center;
     position: relative;
     flex: 0 0 auto;
+    cursor: pointer;
   }
 
   .risk-status-tag {
@@ -1832,12 +1831,14 @@ button:focus-visible {
 }
 
 .modal-content-area {
-  padding: 20px;
+  padding: 10px;
   overflow-y: auto;
   flex-grow: 1;
   font-family: var(--font-family-primary);
   color: var(--gray-soft700);
+}
 
+.modal-content-area, .attack-node-hover-window {
   .card-base {
     display: flex;
     flex-direction: column;
@@ -2052,7 +2053,7 @@ button:focus-visible {
   .issue-summary-card {
     background: var(--gray-soft25);
     border-radius: 20px;
-    padding: 20px 15px 30px 15px;
+    padding: 20px 15px 20px 15px;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -2062,7 +2063,6 @@ button:focus-visible {
     position: relative;
     box-shadow: var(--shadow-background-xsm-box-shadow);
     width: 100%;
-    max-width: 391px;
     margin: 0 auto 20px auto;
     overflow-x: auto;
   }
@@ -2166,4 +2166,17 @@ button:focus-visible {
   .empty-cell-pos2 { left: 160px; top: 95.66px; width: 114px; height: 26px; }
   .empty-cell-pos3 { left: 277px; top: 95.66px; width: 114px; height: 26px; }
   .empty-cell-pos4 { left: 51px; top: 126.66px; width: 114px; height: 26px; }
+}
+
+.attack-node-hover-window {
+  position: absolute;
+  z-index: 1050;
+  border-radius: 8px;
+  max-width: 460px;
+  pointer-events: none;
+}
+
+.attack-node-hover-window > div {
+  width: fit-content !important;
+  box-sizing: border-box !important;
 }

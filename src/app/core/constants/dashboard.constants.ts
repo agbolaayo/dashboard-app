@@ -69,3 +69,12 @@ export const DoughnutChartOptions = {
     }
   }
 };
+
+export const DashboardUIText = {
+  SUMMARY_CHART_TITLE: "Contextual Risk",
+  INFO_CARD_DESCRIPTION_TITLE: "Description",
+  INFO_CARD_EXTRA_TITLE: "Extra",
+  INFO_CARD_REMEDIATION_SECTION_TITLE: "Lorem Ipsum Dolor Sit",
+  ATTACK_PATH_MAIN_TITLE: "Lorem Lorem Lorem",
+  ATTACK_PATH_RELATED_ASSETS_TITLE: "Lorem Ipsum Dolor Sit",
+};

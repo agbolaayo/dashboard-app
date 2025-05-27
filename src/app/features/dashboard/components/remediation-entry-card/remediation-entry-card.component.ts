@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RemediationEntry } from '../../../../core/types/dashboard.types'; //
+import { RemediationEntry, RemediationItemDetail } from '../../../../core/types/dashboard.types';
 
 @Component({
   selector: 'app-remediation-entry-card',
@@ -16,7 +16,7 @@ export class RemediationEntryCardComponent {
     this.detailsVisible = !this.detailsVisible;
   }
 
-  trackByIndex(index: number, item: any): number {
+  trackByIndex(index: number, item: RemediationItemDetail): number {
     return index;
   }
 }
