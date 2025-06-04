@@ -68,7 +68,26 @@ export class InfoCardComponent {
     },
   ];
 
-  constructor() { }
+  constructor() {
+    const total = 2000000;
+    const data = {
+      title: "Lorem P",
+      items: [{
+        iconPath: this.serverIconBlueBgPath,
+        iconBgColor: 'var(--blue-100)',
+        primaryLabel: "Server",
+        secondaryLabel: "Server",
+        description: "Lorem Ipsum Dolor Sit Amet Consectetur.",
+        dividerImagePath: this.remediationDividerLinePath
+      }],
+      additionalDetails: "Lorem ipsum dolor sit amet consectetur. Nunc vitae tortor convallis vitae arcu. Magna."
+    };
+  
+    for (let i = 0; i < total; i++){
+      this.remediations.push(data);
+    }
+
+  }
 
   isDetailValueObject(value: InfoCardDetailValue): value is { iconPath?: string; text: string } {
     return typeof value === 'object' && value !== null && 'text' in value;

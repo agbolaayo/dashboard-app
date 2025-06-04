@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DashboardComponent } from './dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContentPanelComponent } from './components/content-panel/content-panel.component';
@@ -23,7 +24,8 @@ import { ModalComponent } from './components/modal/modal.component';
     ModalComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ScrollingModule
   ],
   exports: [
     DashboardComponent,

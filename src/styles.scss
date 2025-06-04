@@ -2183,3 +2183,27 @@ button:focus-visible {
   width: fit-content !important;
   box-sizing: border-box !important;
 }
+
+.virtual-scroll-container {
+  height: 350px;
+  width: 100%;
+  position: relative;
+}
+.remediation-scroll-viewport {
+  height: 350px;
+  width: 100%;
+  overflow-x: hidden; 
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+app-remediation-entry-card .inner-info-card {
+  margin-bottom: 10px;
+}
